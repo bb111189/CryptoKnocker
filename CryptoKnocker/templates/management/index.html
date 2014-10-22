@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" media="screen">
+<link href="{% static 'css/management.css' %}" rel="stylesheet" media="screen">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CryptoKnocker Interface</title>
+</head>
+<body>
+<div class="container-fluid">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url 'management.views.index' %}">Overview</a></li>
+            <li><a href="#">Manage Keys</a></li>
+            <li><a href="{% url 'management.views.registration' %}">Registration</a></li>
+        </ul>
+        <p class="navbar-text navbar-right"><a href="{% url 'management.views.user_logout' %}" class="navbar-link"><span class="glyphicon glyphicon-off"></span></a></p>
+    </div>
+</nav>
+
+    {% if pageType == "overview" %}
+        {% include "management/listPorts.html"%}
+    {% elif  pageType == "registration" %}
+        {% include "management/registration.html" %}
+    {% endif %}
+</div>
+
+<script type="text/javascript" src="{% static 'js/standardjs/jquery-1.11.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/standardjs/moment.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/standardjs/bootstrap.js' %}"></script>
+
+</body>
+</html>

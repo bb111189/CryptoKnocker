@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" media="screen">
+<link href="{% static 'css/mainpage.css' %}" rel="stylesheet" media="screen">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CryptoKnocker Interface</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row mainDiv" style="text-align: center">
+        <hr>
+        <!--Status Text-->
+        {% if not user.is_authenticated%}
+            <h1>CryptoKnocker</h1>
+            <div class="container">
+                {% include "forms/login_form.html"%}
+            </div>
+        {% else%}
+
+
+        {%endif%}
+        <hr>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/standardjs/jquery-1.11.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/standardjs/moment.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/standardjs/bootstrap.js' %}"></script>
+
+</body>
+</html>
