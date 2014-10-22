@@ -33,6 +33,8 @@ def openServicePort():
 		return;
 	else:
 		rule = iptc.Rule()
+		rule.in_interface = "wlan0"
+		rule.out_interface = "eth0"
 		rule.src = CLIENT_IP
 		rule.protocol = "tcp"
 		match = iptc.Match(rule, "tcp")
