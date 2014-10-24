@@ -1,48 +1,48 @@
 # Open server service
 # Require client's ip address, desired port
 
-import sys
-import argparse
+# import argparse
 import iptc
 
-parser = argparse.ArgumentParser(description='open server service.')
-parser.add_argument("clientIP", help="client's ip that you want to allow", type=str)
-parser.add_argument("servicePort", help="server service that you need access", type=int)
-args = parser.parse_args()
-print(args.clientIP)
-print(args.servicePort)
+# parser = argparse.ArgumentParser(description='open server service.')
+# parser.add_argument("clientIP", help="client's ip that you want to allow", type=str)
+# parser.add_argument("servicePort", help="server service that you need access", type=int)
+# args = parser.parse_args()
+# print(args.clientIP)
+# print(args.servicePort)
 
-CLIENT_IP = args.clientIP
-SERVICE_PORT = args.servicePort
+# CLIENT_IP = args.clientIP
+# SERVICE_PORT = args.servicePort
 
-def hasRuleExistInFilter():
-	chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "INPUT")
-	for rule in chain.rules:
-		ipList = (rule.src).split('/')
-		currSrcIP = ipList[0]
-		for match in rule.matches:
-			currAllowedPort = int(match.dport)
-			currTarget = rule.target.name
-		if (currSrcIP == CLIENT_IP and currAllowedPort == SERVICE_PORT and currTarget == "ACCEPT"):
-			return True
-		else:
-			return False
 
-def openServicePort():
-	if (hasRuleExistInFilter() == True):
-		return;
-	else:
-		rule = iptc.Rule()
-		rule.in_interface = "wlan0"
-		rule.out_interface = "eth0"
-		rule.src = CLIENT_IP
-		rule.protocol = "tcp"
-		match = iptc.Match(rule, "tcp")
-		match.dport = "%d" % SERVICE_PORT
-		rule.add_match(match)
-		rule.target = iptc.Target(rule, "ACCEPT")
-		chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "INPUT")
-		chain.insert_rule(rule)
-	return;
+def has_rule_exist_in_filter(client_ip, service_port):
+    chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "INPUT")
+    for rule in chain.rules:
+        ipList = rule.src.split('/')
+        currSrcIP = ipList[0]
+        for match in rule.matches:
+            currAllowedPort = int(match.dport)
+            currTarget = rule.target.name
+        if currSrcIP == client_ip and currAllowedPort == service_port and currTarget == "ACCEPT":
+            return True
+        else:
+            continue
+    return False
 
-openServicePort()
+
+def open_service_port(client_ip, service_port):
+    isRuleExist = has_rule_exist_in_filter(client_ip, service_port)
+    if isRuleExist:
+        return
+    else:
+        rule = iptc.Rule()
+        rule.in_interface = "wlan0"
+        rule.out_interface = "eth0"
+        rule.src = client_ip
+        rule.protocol = "tcp"
+        match = iptc.Match(rule, "tcp")
+        match.dport = "%d" % service_port
+        rule.add_match(match)
+        rule.target = iptc.Target(rule, "ACCEPT")
+        chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "INPUT")
+        chain.insert_rule(rule)
