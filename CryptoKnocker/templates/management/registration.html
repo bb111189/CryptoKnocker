@@ -1,0 +1,42 @@
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <form class="form-horizontal" method="post" action="" id="user-details-form" onsubmit=""> {% csrf_token %}
+            <fieldset>
+                <!--Display user details -->
+                <legend>User Details</legend>
+
+                {{user_form.management_form}}
+                {%for form in user_form%}
+                    {{ form.id }}
+
+                    <div class="form-group ">
+                        <label class="col-md-4 control-label" for="{{form.name}}">{{form.label_tag}}</label>
+                        <div class="col-md-5">
+                            {%for field in form%}
+                                {{field}}
+                            {%endfor%}
+
+                            {{form.help_text}}
+
+                            {% for error in form.errors %}
+                                <p class="errorField">{{error}}</p>
+                            {%endfor%}
+
+
+
+                        </div>
+                    </div>
+                {%endfor%}
+
+                <div align="center">
+                    <button type="submit" class="submit-user btn btn-info">
+                        Register
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>

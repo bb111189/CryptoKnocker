@@ -1,0 +1,32 @@
+{%if portSet == False %}
+    <h4>There's no ports to monitor</h4>
+{%else%}
+    <!--Avatar List-->
+    <table class="table table-striped">
+        {{portSet.management_form}}
+        <thead>
+        <tr>
+            {%with portSet|first as form%}
+                {%for field in form.visible_fields%}
+                    <th>{{field.label_tag}}</th>
+                {%endfor%}
+            {%endwith%}
+        </tr>
+        </thead>
+        <tbody>
+        {%for form in portSet%}
+            {% if form.name != "password" %}
+                <tr>
+                    {{ form.id }}
+                    {%for field in form.visible_fields%}
+
+                        <td>{{field.value}}</td>
+
+                    {%endfor%}
+                </tr>
+            {% endif %}
+        {% endfor%}
+        </tbody>
+    </table>
+    <!--End of Avatar List-->
+{%endif%}
