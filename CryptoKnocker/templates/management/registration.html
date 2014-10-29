@@ -2,13 +2,13 @@
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <form class="form-horizontal" method="post" action="" id="user-details-form" onsubmit=""> {% csrf_token %}
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="" id="user-details-form" onsubmit=""> {% csrf_token %}
             <fieldset>
                 <!--Display user details -->
                 <legend>User Details</legend>
 
                 {{user_form.management_form}}
-                {%for form in user_form%}
+                {%for form in user_form.visible_fields%}
                     {{ form.id }}
 
                     <div class="form-group ">
@@ -19,17 +19,15 @@
                             {%endfor%}
 
                             {{form.help_text}}
-
-                            {% for error in form.errors %}
-                                <p class="errorField">{{error}}</p>
-                            {%endfor%}
-
-
-
                         </div>
                     </div>
                 {%endfor%}
 
+                <div align="center">
+                    {% for error in user_form.non_field_errors %}
+                        <strong class="alert-danger">{{ error }}</strong>
+                    {% endfor %}
+                </div>
                 <div align="center">
                     <button type="submit" class="submit-user btn btn-info">
                         Register

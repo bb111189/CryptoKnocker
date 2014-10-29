@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^$', include("mainpage.urls")),
     url(r'^management/$', "management.views.index"),
     url(r'^logout/$', "management.views.user_logout"),
-    url(r'^management/registration/$', "management.views.registration")
+    url(r'^management/registration/$', "management.views.registration"),
+    url(r'^management/keys/$', "management.views.manageKeys"),
 )

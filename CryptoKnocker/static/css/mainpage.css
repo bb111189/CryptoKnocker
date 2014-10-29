@@ -95,6 +95,10 @@ hr {
     background-color: rgba(245, 245, 245, 0.20);
 }
 
+body{
+    color: #ffffff;
+}
+
 li {
     background-color: rgba(245, 245, 245, 0.0);
 }

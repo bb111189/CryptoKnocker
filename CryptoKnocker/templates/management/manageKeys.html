@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{%if portSet == False %}
+    <div align="center"><h4>No port to manage</h4></div>
+{%else%}
+    <!--Avatar List-->
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <table class="table table-striped">
+            {{portSet.management_form}}
+            <thead>
+            <tr>
+                {%with portSet|first as form%}
+                    {%for field in form.visible_fields%}
+                        <th>{{field.label_tag}}</th>
+                    {%endfor%}
+                {%endwith%}
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%for form in portSet%}
+                <tr>
+                    <form method="post" action=""> {% csrf_token %}
+                        <input id="form_id" name="form_id" type="hidden" value="{{ form.id.value }}">
+                        {%for field in form.visible_fields%}
 
-</body>
-</html>
+                            <td>{{field.value}}</td>
+                        {%endfor%}
+
+                        <td>
+                            <button type="submit" class="submit-user btn btn-info">
+                                Remove
+                            </button>
+                        </td>
+                    </form>
+                </tr>
+            {% endfor%}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-3"></div>
+    <!--End of Avatar List-->
+{%endif%}

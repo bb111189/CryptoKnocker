@@ -13,29 +13,61 @@ from management.models import portProfileList, portProfile
 # Create your views here.
 @login_required()
 def index(request):
-
-    portSet = __list_ports()
+    '''
+    Overview of all the port status
+    :param request:
+    :return:
+    '''
+    portSet = __list_ports('userID','publicKey')
     return render_to_response("management/index.html",{"portSet":portSet, "pageType":"overview"},context_instance=RequestContext(request))
 
 @login_required()
 def user_logout(request):
+    '''
+    Method for user logout
+    :param request:
+    :return:
+    '''
     logout(request)
     return HttpResponseRedirect('/')
 
 @login_required()
 def registration(request):
-    '''if request.POST:
-        user_form = portProfileList(request.POST)
+    '''
+    View method for registration process.
+    :param request:
+    :return:
+    '''
+    if request.POST:
+        user_form = portProfileList(request.POST, request.FILES)
+        print request.FILES
         c = {}
         c.update(csrf(request))
+
         if user_form.is_valid():
             profile = __save_to_database(user_form)
-            request.session["id"] = str(profile.user_id)
             portSet = __list_ports()
-            return render_to_response("management/index.html",{"portSet":portSet, "pageType":"overview"},context_instance=RequestContext(request))
-    '''
+
+            #generate QR CODE here
+
+            return render_to_response("management/index.html",{"pageType":"qrcode"},context_instance=RequestContext(request))
+        else:
+            return render_to_response("management/index.html",{"pageType":"registration", "user_form":user_form},context_instance=RequestContext(request))
     user_form = portProfileList()
     return render_to_response("management/index.html",{"pageType":"registration", "user_form":user_form},context_instance=RequestContext(request))
+
+@login_required()
+def manageKeys(request):
+    if request.POST:
+        c = {}
+        c.update(csrf(request))
+        id_value =  request.POST['form_id']
+        profile = portProfile.objects.filter(id=id_value).delete()
+        return HttpResponseRedirect("/management/keys/")
+
+    portSet = __list_ports()
+    return render_to_response("management/index.html",{"portSet":portSet, "pageType":"manageKeys"},context_instance=RequestContext(request))
+
 
 def __save_to_database(user_form):
     '''
@@ -48,7 +80,7 @@ def __save_to_database(user_form):
     profile.save()
     return profile
 
-def __list_ports():
+def __list_ports(*exclusion):
     '''
     Private method
     Get all objects from management.portProfile table
@@ -56,7 +88,7 @@ def __list_ports():
     '''
     profile_formset = modelformset_factory(
         portProfile,
-        exclude=('user',),
+        exclude=(exclusion),
         labels=portProfileList.Meta.labels
     )
 

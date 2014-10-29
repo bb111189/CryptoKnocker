@@ -31,11 +31,22 @@ body {
 
 }
 
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: rgba(245, 245, 245, 0.05);
+}
+
 html {
     height: 100%
 
 }
 
+body{
+    color: #ffffff;
+}
+
+.navbar-default .navbar-nav > li > a{
+    color: #ffffff;
+}
 hr {
     border-top: 2px solid rgba(245,245,245,0.2);
 }
@@ -45,4 +56,10 @@ hr {
 
 .navbar-default{
     background-color: rgba(245, 245, 245, 0.20);
+}
+
+.alert-danger{
+    color:#990603;
+    background-color:rgba(255, 255, 255, 0.14);
+    border-color:rgba(76, 41, 47, 0);
 }
