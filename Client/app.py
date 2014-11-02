@@ -2,8 +2,7 @@ import sys
 from PyQt4 import QtCore, QtGui
 from clientUI import Ui_CrytoKnocker
 from keyGeneratorUI import KeyGeneratorUI
-import keyGeneratorUI
-
+import ConfigParser
 
 class StartQT4(QtGui.QMainWindow):
     def setIconImage(self):
@@ -28,24 +27,33 @@ class StartQT4(QtGui.QMainWindow):
         self.ui.actionExit.triggered.connect(QtGui.qApp.quit);
 
     def knockServer(self):
-        self.ui.label_6.setText("Port open")
-        print self.ui.UserField.text()
-        print self.ui.ServerField.text()
-        print self.ui.PortField.text()
-        print self.ui.OTPField.text()
-        print "hi"
+        user =  str(self.ui.UserField.text())
+        server =  str(self.ui.ServerField.text())
+        port =  str(self.ui.PortField.text())
+        OTP = str(self.ui.OTPField.text())
 
-        QtCore.QTimer.singleShot(3000, self.hideLabelText)
+        if self.isUserExists("User private key", user):
+            UserPteKey = self.GetUserPublicKey("User private key")[user]
+            print UserPteKey
+
+            #Meed to pass to nich script with the following parameter: User, Server, Port, OTP, User's private key
+            self.ui.label_6.setText("Port open")
+            QtCore.QTimer.singleShot(3000, self.hideLabelText
+)
 
     def lockServer(self):
-        self.ui.label_6.setText("Port closed")
-        print self.ui.UserField.text()
-        print self.ui.ServerField.text()
-        print self.ui.PortField.text()
-        print self.ui.OTPField.text()
-        print "bye"
+        user =  str(self.ui.UserField.text())
+        server =  str(self.ui.ServerField.text())
+        port =  str(self.ui.PortField.text())
+        OTP = str(self.ui.OTPField.text())
 
-        QtCore.QTimer.singleShot(3000, self.hideLabelText)
+        if self.isUserExists("User private key", user):
+            UserPteKey = self.GetUserPublicKey("User private key")[user]
+            print UserPteKey
+
+            #Meed to pass to nich script with the following parameter: User, Server, Port, OTP, User's private key
+            self.ui.label_6.setText("Port closed")
+            QtCore.QTimer.singleShot(3000, self.hideLabelText)
 
     def openKeyGen(self):
         self.keygenWindow = KeyGeneratorUI(self)
@@ -53,6 +61,26 @@ class StartQT4(QtGui.QMainWindow):
 
     def hideLabelText(self):
         self.ui.label_6.setText("")
+
+    def isUserExists(self, section, user):
+        Config = ConfigParser.ConfigParser()
+        Config.read("user.ini")
+        options = Config.options(section)
+        return user in options
+
+
+    def GetUserPublicKey(self, section):
+        Config = ConfigParser.ConfigParser()
+        Config.read("user.ini")
+        dict1 = {}
+        options = Config.options(section)
+        for option in options:
+            try:
+                dict1[option] = Config.get(section, option)
+            except:
+                dict1[option] = None
+        return dict1
+
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
