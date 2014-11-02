@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="Django default" uuid="0d164571-d07a-4f7b-b64d-d49f15ecce3d">
       <driver-ref>mysql</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\My document\Dropbox\Data\NUS\1415s1\CS3235\Project\ProjectDir\CS3235\CryptoKnocker\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db.sqlite3</jdbc-url>
       <libraries />
     </data-source>
   </component>
