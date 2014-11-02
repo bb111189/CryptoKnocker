@@ -40,8 +40,20 @@ html {
 
 }
 
+.glyphicon {
+    color: #ffffff;
+}
+
 body{
     color: #ffffff;
+}
+
+.modal-header, .modal-footer {
+    background-color: rgba(15, 28, 40, 0.1);
+}
+
+.modal-content{
+    background-color: rgba(44, 75, 100, 0.7);
 }
 
 .navbar-default .navbar-nav > li > a{

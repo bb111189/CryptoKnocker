@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-from django.shortcuts import render, render_to_response, HttpResponseRedirect
+from django.shortcuts import render, render_to_response, HttpResponseRedirect, HttpResponse
+import json
 from models import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -36,7 +37,7 @@ def __login_handler(request, user):
         print "%s authenticated"%(isAuthenticatedUser.username)
     else:
         print "%s not authenticated"%(isAuthenticatedUser.username)
-        return __render_mainpage(request)
+        #return __render_mainpage(request)
 
 def __render_mainpage(request):
     login_form = LoginForm()
@@ -54,8 +55,8 @@ def index(request):
     :return: renders html template
     '''
     user = request.user
-    if request.POST:
-        __login_handler(request, user)
+    #if request.POST:
+    #    __login_handler(request, user)
 
     if not user.is_authenticated():
         #display login page
@@ -63,3 +64,24 @@ def index(request):
     else:
         #display admin page
         return HttpResponseRedirect("management")
+
+def login_form(request):
+
+    user = request.user
+    if request.POST:
+        __login_handler(request, user)
+
+    if not user.is_authenticated():
+        #display login page
+        #return __render_mainpage(request)
+        return HttpResponse(
+            json.dumps({"nothing":"nothing"}),
+            content_type="application/json"
+        )
+    else:
+        #display admin page
+        isFirstLogin = user.first_name
+        return HttpResponse(
+            json.dumps({"firstTime":isFirstLogin}),
+            content_type="application/json"
+        )

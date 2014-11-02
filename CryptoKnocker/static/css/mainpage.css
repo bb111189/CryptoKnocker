@@ -127,3 +127,7 @@ td {
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: rgba(245, 245, 245, 0.2);
 }
+
+#login_form{
+    -webkit-animation-delay: 1s;
+}

@@ -3,6 +3,7 @@
 <html>
 <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" media="screen">
 <link href="{% static 'css/mainpage.css' %}" rel="stylesheet" media="screen">
+<link href="{% static 'css/animate.css' %}" rel="stylesheet" media="screen">
 <head lang="en">
     <meta charset="UTF-8">
     <title>CryptoKnocker Interface</title>
@@ -10,24 +11,69 @@
 <body>
 <div class="container-fluid">
     <div class="row mainDiv" style="text-align: center">
-        <hr>
+        <hr class="ruler">
         <!--Status Text-->
         {% if not user.is_authenticated%}
-            <h1>CryptoKnocker</h1>
-            <div class="container">
+            <div id="login_logo">
+                <h1>CryptoKnocker</h1>
+            </div>
+            <div class="container" id="login_container">
                 {% include "forms/login_form.html"%}
+            </div>
+            <div id="login-error-container">
+
             </div>
         {% else%}
 
 
         {%endif%}
-        <hr>
+        <hr class="ruler">
     </div>
 </div>
 
 <script type="text/javascript" src="{% static 'js/standardjs/jquery-1.11.1.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/standardjs/moment.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/standardjs/bootstrap.js' %}"></script>
+
+<script type="text/javascript">
+   $('.ruler').addClass('animated fadeIn');
+    $('#login_container').addClass('animated fadeInUp');
+    $('#login_logo').addClass('animated fadeInDown');
+
+    //$('#login_form').addClass('animated fadeOutUp');
+    $('#login-form').on('submit', function(event){
+        event.preventDefault();
+        console.log("login form submitted");
+        create_post();
+    });
+
+    function create_post(){
+        var term = $('#login-form').serialize();
+        var url = "login/";
+
+        var posting = $.post(url, term);
+        posting.done(function(data){
+           console.log("login ok...");
+           $('#login-form').val('');
+           $('#login-form').addClass('animated fadeOutDown');
+           $('#login_logo').addClass('animated fadeOutUp');
+           $('#login-error-container').addClass('animated fadeOut');
+           $('.ruler').addClass('animated fadeOut');
+           $('.ruler').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+               console.log(data.firstTime);
+               window.location.replace("management/login");
+           });
+           //
+        });
+
+        posting.fail(function (data){
+           console.log("login fail");
+           $('#login-error-container').addClass('animated fadeIn');
+           $('#login-error-container').html("<h4>Username/password not found</h4>");
+        });
+    }
+
+
+</script>
 
 </body>
 </html>

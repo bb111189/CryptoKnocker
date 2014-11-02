@@ -11,6 +11,8 @@ from management.models import portProfileList, portProfile
 
 
 # Create your views here.
+
+
 @login_required()
 def index(request):
     '''
@@ -19,7 +21,27 @@ def index(request):
     :return:
     '''
     portSet = __list_ports('userID','publicKey')
-    return render_to_response("management/index.html",{"portSet":portSet, "pageType":"overview"},context_instance=RequestContext(request))
+    just_logged_in = False
+    #isFirstLogin = request.user.first_name
+    isFirstLogin = False
+
+    return render_to_response("management/index.html",{"portSet":portSet, "pageType":"overview", "just_logged_in":just_logged_in, "isFirstLogin":isFirstLogin},context_instance=RequestContext(request))
+
+@login_required()
+def user_login(request):
+    '''
+    Login page, display wizard if first time logged in, else display overview page
+    :param request:
+    :return:
+    '''
+    #isFirstLogin = request.user.first_name
+    isFirstLogin = False
+    portSet = __list_ports('userID','publicKey')
+    just_logged_in = True
+
+    return render_to_response("management/index.html",{"portSet":portSet, "pageType":"overview", "just_logged_in":just_logged_in, "isFirstLogin":isFirstLogin},context_instance=RequestContext(request))
+
+
 
 @login_required()
 def user_logout(request):
