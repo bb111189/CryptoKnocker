@@ -237,11 +237,11 @@
     </property>
     <addaction name="separator"/>
     <addaction name="actionAdd_Private_Key"/>
+    <addaction name="actionAdd_Server_Public_Key"/>
     <addaction name="actionExit"/>
    </widget>
    <addaction name="menuOptions"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
@@ -250,6 +250,11 @@
   <action name="actionAdd_Private_Key">
    <property name="text">
     <string>Add Private Key</string>
+   </property>
+  </action>
+  <action name="actionAdd_Server_Public_Key">
+   <property name="text">
+    <string>Add Server Public Key</string>
    </property>
   </action>
  </widget>

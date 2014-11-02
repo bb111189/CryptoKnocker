@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'client.ui'
 #
-# Created: Thu Oct 30 00:18:13 2014
+# Created: Sun Nov 02 16:12:17 2014
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -89,15 +89,15 @@ class Ui_CrytoKnocker(object):
         self.menuOptions = QtGui.QMenu(self.menubar)
         self.menuOptions.setObjectName(_fromUtf8("menuOptions"))
         CrytoKnocker.setMenuBar(self.menubar)
-        self.statusbar = QtGui.QStatusBar(CrytoKnocker)
-        self.statusbar.setObjectName(_fromUtf8("statusbar"))
-        CrytoKnocker.setStatusBar(self.statusbar)
         self.actionExit = QtGui.QAction(CrytoKnocker)
         self.actionExit.setObjectName(_fromUtf8("actionExit"))
         self.actionAdd_Private_Key = QtGui.QAction(CrytoKnocker)
         self.actionAdd_Private_Key.setObjectName(_fromUtf8("actionAdd_Private_Key"))
+        self.actionAdd_Server_Public_Key = QtGui.QAction(CrytoKnocker)
+        self.actionAdd_Server_Public_Key.setObjectName(_fromUtf8("actionAdd_Server_Public_Key"))
         self.menuOptions.addSeparator()
         self.menuOptions.addAction(self.actionAdd_Private_Key)
+        self.menuOptions.addAction(self.actionAdd_Server_Public_Key)
         self.menuOptions.addAction(self.actionExit)
         self.menubar.addAction(self.menuOptions.menuAction())
 
@@ -115,4 +115,5 @@ class Ui_CrytoKnocker(object):
         self.menuOptions.setTitle(_translate("CrytoKnocker", "Options", None))
         self.actionExit.setText(_translate("CrytoKnocker", "Exit", None))
         self.actionAdd_Private_Key.setText(_translate("CrytoKnocker", "Add Private Key", None))
+        self.actionAdd_Server_Public_Key.setText(_translate("CrytoKnocker", "Add Server Public Key", None))
 
