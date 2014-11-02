@@ -18,9 +18,7 @@ class StartQT4(QtGui.QMainWindow):
         QtGui.QWidget.__init__(self, parent)
         self.ui = Ui_CrytoKnocker()
         self.ui.setupUi(self)
-
         self.setIconImage()
-
         self.ui.Knock.clicked.connect(self.knockServer);
         self.ui.Lock.clicked.connect(self.lockServer);
         self.ui.actionAdd_Private_Key.triggered.connect(self.openKeyGen);
@@ -32,14 +30,7 @@ class StartQT4(QtGui.QMainWindow):
         port =  str(self.ui.PortField.text())
         OTP = str(self.ui.OTPField.text())
 
-        if self.isUserExists("User private key", user):
-            UserPteKey = self.GetUserPublicKey("User private key")[user]
-            print UserPteKey
-
-            #Meed to pass to nich script with the following parameter: User, Server, Port, OTP, User's private key
-            self.ui.label_6.setText("Port open")
-            QtCore.QTimer.singleShot(3000, self.hideLabelText
-)
+        self.sendKnocks(user)
 
     def lockServer(self):
         user =  str(self.ui.UserField.text())
@@ -47,27 +38,39 @@ class StartQT4(QtGui.QMainWindow):
         port =  str(self.ui.PortField.text())
         OTP = str(self.ui.OTPField.text())
 
+        self.sendLocks(user)
+
+    def sendKnocks(self, user):
         if self.isUserExists("User private key", user):
             UserPteKey = self.GetUserPublicKey("User private key")[user]
             print UserPteKey
 
-            #Meed to pass to nich script with the following parameter: User, Server, Port, OTP, User's private key
-            self.ui.label_6.setText("Port closed")
-            QtCore.QTimer.singleShot(3000, self.hideLabelText)
+            # Meed to pass to nich script with the following parameter: User, Server, Port, OTP, User's private key
+            self.printToScreen("Port Open")
+
+        else:
+            self.printToScreen("No such user")
+
+    def sendLocks(self, user):
+        if self.isUserExists("User private key", user):
+            UserPteKey = self.GetUserPublicKey("User private key")[user]
+            print UserPteKey
+
+            # Meed to pass to nich script with the following parameter: User, Server, Port, OTP, User's private key
+            self.printToScreen("Port closed")
+
+        else:
+            self.printToScreen("No such user")
 
     def openKeyGen(self):
         self.keygenWindow = KeyGeneratorUI(self)
         self.keygenWindow.show()
-
-    def hideLabelText(self):
-        self.ui.label_6.setText("")
 
     def isUserExists(self, section, user):
         Config = ConfigParser.ConfigParser()
         Config.read("user.ini")
         options = Config.options(section)
         return user in options
-
 
     def GetUserPublicKey(self, section):
         Config = ConfigParser.ConfigParser()
@@ -81,6 +84,12 @@ class StartQT4(QtGui.QMainWindow):
                 dict1[option] = None
         return dict1
 
+    def printToScreen(self, text):
+        self.ui.label_6.setText(text)
+        QtCore.QTimer.singleShot(3500, self.hideLabelText)
+
+    def hideLabelText(self):
+        self.ui.label_6.setText("")
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)

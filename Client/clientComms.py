@@ -18,14 +18,14 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKey):
     global SERVER, KNOCK_PORT, s, msg, d, data, addr, reply
     SERVER = server
     KNOCK_PORT = 8888
-    nounce = int(time.time())
+    nonce = int(time.time())
     publicIp = ipgetter.myip()
-    ipaddrOfClient = socket.gethostbyname(socket.getfqdn())
+    IPAddrOfClient = socket.gethostbyname(socket.getfqdn())
     client_private_key = clientPteKey
 
-    ip = IPAddress(ipaddrOfClient)
+    ip = IPAddress(IPAddrOfClient)
     if (not (ip.is_unicast() and not ip.is_private())):
-        ipaddrOfClient = IPAddress(publicIp)
+        IPAddrOfClient = IPAddress(publicIp)
 
 
     # Datagram (udp) socket
@@ -48,7 +48,7 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKey):
     print 'Socket bind complete'
 
     #first comms
-    payload = [user, ipaddrOfClient, portToOpen, otp, nounce];
+    payload = [user, IPAddrOfClient, portToOpen, otp, nonce];
     msg = raw_input(pickle(payload))  #serialize the payload
     msg = encrypt_RSA(server_public_key, msg)
     s.sendto(msg, (SERVER, KNOCK_PORT))
@@ -60,15 +60,15 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKey):
     addr = d[1]
     data = decrypt_RSA(server_public_key, data)
 
-    if not (data == nounce):  #not fresh
+    if not (data == nonce):  #not fresh
         return False
 
     #third comms
-    reply = nounce
+    reply = nonce
     reply = encrypt_RSA(client_private_key, reply)  #this complete two way identity proofing
     s.sendto(reply, addr)
     print 'Message[' + addr[0] + ':' + str(addr[1]) + '] - ' + data.strip()
     s.close()
-    return True;
+    return True
 
 talkToServer()
