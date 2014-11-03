@@ -1,18 +1,41 @@
-# client_private_key = '-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAzsH1AvD7mvqit5YvbAekHNmGIgsTNVaJpl5JCMb0RjCdKELd\ng49BNC1Ct2v90OYpaChyEEJzf/gUT1WgNsfIK1MV05JlLTOR4uObqTXKlXv6zVsN\nKsoPf64k+Apfq+ZuH7VpBTgTGFgzNDEqrow0r9yMCAbNrT8jH1NuG3GWhYBLcOyj\nj9tfj2BA89LywHHAjqk2bmtxj2oXBHaEZeo7xKzDZ8DtMzWA9yH0RnNnx84KmH6n\nLaGkc2pOjQ/d0Hw1AN8DlS5EtFB86Z6YbXr7ptHuSNSTkzKZOSuKCZi3DSlY9+CF\nveN5YV9cInf+E5pdSH4/njOJCkNAsxtKUPCKyQIDAQABAoIBAERn8ZtWhbhB4mIh\nQ3FXmdmdsn5C8cj856/uk/VedeVfIi/253kmhWkw7FjpVuGttNdsQkjU44fcWUPi\nTY6yTKzg4WDNl8H7xPGvYon6bRtGGLWmwVV94uDYigyyyfKC276L88IxSkgMrmw/\nNCLp6mig7IefUJ9YO1Oa89wKmcVzE70w2ONyKagqLmwnnXww8o5Hg1EMwxJdSQ/H\n32JeIm8skhQzgqS37F/2MJpbeaI7aEo8SyLltNW4sLLS/+JT6U/a0koiokb5NxnY\nujfBg6VC/+UC+/gsd0I/uPQYSBr8c3etr2+WVuVaLwUwnzFeL2n75oiLi5WawiwY\nLOkrQ30CgYEA4TXULv+Cq1I1fZz8PiNkteVK26TWZXyfPGjmnUWNExJS5eLUvJup\nlEhcaw4uZ/RvfrHU54mUwDK5I76EXCcQ4QAPqu29+7fuSmC+Gf5N8J7WDqKfV7aC\nN3FJwlxYfMKvGMvVs2OJQ0LgKpQgvvqnoKcb33ltS2ZwJrGe5oNVFF8CgYEA6wZN\nQ8mtnXXaFRhbu8I5deu7ZP5PHazl8d2bviezj6hKtvA2hng6pck/NPxi2KGv6R4Q\nY8i8JnVaxjKbxHiH8IM/FMdyZ8glWI0C36SmkwVa8AZTcmT0TK+bqKzStVjExJGE\nZ0ziQ3zadAu0zu+b9jVpBz9ThAE7xMnQcK4R8dcCgYEAtk23rC/DW+GZUUyR188Y\nyDGLLk+6Cb8eu20DOU5Cy6xqlJLQuLidRl5pCXQaVqZE1t8nRCJX2ll1Cx0+0cYB\n4NEG3cvDnY8fgu/bEvmLp/s7te8oY31m3XCET6QnMR77VGw0Whl51Iu/IFh2RYJr\nzR1Y78bAlWef44Km6Vxos6sCgYAH5KFJqodLJ38YgEXsa1x0qmMTxDqx+3GJivDF\nFR5Br9w6gpzCLV2C3dxikitbrSp0QM86Gq6+9+gBigeTNJ0UJcRDlWMxOxaN/8Zd\n7nCttVtVflDlIaDWxnsK0isNbhrFo0F4GqvqqlHH3fDHlmJ9hVOuq6DJaSUxubln\nX2E45wKBgQDggBOfNJBnhIIzoDJLJ0uQPNIpRXvRQRnCEFGlJsTdDGkaE7+8aany\nfPoJ4eHeD4tb0umlYvUNWgfsRm6vfehypa70eTTx8jnKYGhp1FRdC3M2uWoS1RdF\nTdJOEQpvDZm2ZmwFKshZlmsupqwCcKJkJ49IA/zdWCmjv87ml2TjOA==\n-----END RSA PRIVATE KEY-----'
-#client_public_key = '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzsH1AvD7mvqit5YvbAek\nHNmGIgsTNVaJpl5JCMb0RjCdKELdg49BNC1Ct2v90OYpaChyEEJzf/gUT1WgNsfI\nK1MV05JlLTOR4uObqTXKlXv6zVsNKsoPf64k+Apfq+ZuH7VpBTgTGFgzNDEqrow0\nr9yMCAbNrT8jH1NuG3GWhYBLcOyjj9tfj2BA89LywHHAjqk2bmtxj2oXBHaEZeo7\nxKzDZ8DtMzWA9yH0RnNnx84KmH6nLaGkc2pOjQ/d0Hw1AN8DlS5EtFB86Z6YbXr7\nptHuSNSTkzKZOSuKCZi3DSlY9+CFveN5YV9cInf+E5pdSH4/njOJCkNAsxtKUPCK\nyQIDAQAB\n-----END PUBLIC KEY-----'
-#server_public_key = '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzGp69YJK5LjvG2oAJiwa\nha55Lr6G9RpQYEiXZvBS3GzXYUUs4ThAvVymrIS5J5RGqWJjyduW3i2PfRBrT8h/\nH43Vy0rjs1rnCjU8ORc0Z+gKmiFDyi3wqEBgjPR8sx66/jHRY6cAraA0ngyAp5KN\nMAqeIfD7LvzVM9sakqxO0QIAdxPrCzlcUxx1tjxtOJ5hheOVTzhDBcsJWT9PscNi\nlP8w9EaSeg4+ZGRRlcFNx9EBe6M+Ov7mbuKoigfnXKgza+GXeJOYIGfdhh9XiFgd\nmfI59VPOxsaDzywlAL12eWZczaK2lC5cyk6IKg2zoWrPf13MtIG1iREKaxmOJbVp\nJwIDAQAB\n-----END PUBLIC KEY----'
+#Hardcode. client is john
 server_public_key = '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnJdl0MKhHQt8T9h1hefO\nl+DdBBP1kudIIq+aH7HpBV6aBoIqv0MgsNvIzEGtYF52anvAL7A8bWHulcKibP26\nyx5Jop0liBCZPvl53g4JqSJvhRscVMW0FojpifhJTuiytPbJOACy/Um2DJZVJbnm\nm+40+QUcW61QLfRAKsNthmKjyeX9qAPJhImwie2GHNRDByMCWXDlnb/VS6XTgsZG\nw+2dqOAX7TRIDGAhumZ6RgJY298fxj5XUdQ4vXp9tPc7D1MhIhVR/s/AY/uIVpPg\nYfbzAZ9jgpMEsLckNcr3n6OstOFyMGtPWrRiPzL/SCjl3QkveGuWHAbabu+H9qX7\nKQIDAQAB\n-----END PUBLIC KEY-----'
-client_private_key = ''
+client_private_key = '-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQEAkSq3EDTiGCnHM8nnwagJsmqnqtgzsja8wKX6P2gr2NcfUtnv\nDW5jelmfnTuRLwCYcCQ6gpjo5M8KMeLdcbl6zB+zadTH5FVAj7DJHiHszx8lBGLL\nVOjWtR9OvucF13PCZ18SqCvld1WgxStSQWHtPsoGAbFdMg8UVRjnQW8MM1tNnI8Z\nsyFfzXHQTZr4Jn77rw8CZmMgHT5Bd5quE6An+mw1HFo2Tkao9ED2zIdU9JDNKvKE\nrQrnDOHyrdWLcYZivrPhTYxqFrbkDRhKF93Y20xfLq3vgwWv19saBoNTkMrvBETT\nYCM0bw3Zm6z0PxcKFLgVMJHtuoFmnmgLxQnedwIDAQABAoIBAChV+BvWteQE58bq\nGS1kJZ2fqQr9nA+uye+1rr0jkttjmt6Ik7XlsFp0wLcNsB+hSLoQNvnGxx+cr7aA\n1QsegJJrVIzZhNlbHt9OPfPTdVtvyfdYBCuJru8Qze6ZfrQJBEF411RHLjFkZ5Gh\noe9s6GED/XtG7yBTtFCY5Nj3pCo4jyhV2kNxEqNe3BHTQfZpTMFPhnAGvgd5YKo2\nxcRA7TyGfW6nmyKr1KnlnrPIXzcNRBBvzRz7n5Nq8noA8M4whV6la2Bs4GAYZ+MD\n6JmZp2yCPdrJnchAolmAYw8IFkpXq6z9YeYgroDPcE48aNMkMxjCHhdFuyptEF/L\ngcBnwmECgYEAtxkp+BPJmsa/Y5yfrdT5skFv9TrT1TcN3gwa7KOUY7XYIAKse5UY\nzXZtMNdc2zeRBneOEJDYYAVgYQKdaohYK64B1em+xCw/ZiQrIVnbeRD3d7uYqHof\npvaz191QJNLHutxnBnV5+wC8E2pxn5v3znA7eSct36RMF0wr1j0Qcd8CgYEAyvdG\n127hJTTJboJfwNV0CPoPEh/8v797JeD6M/EBmH+SDwLVYGGjnkkwdvV8+7NSAEJd\nxKcVBoXMODeVqRdF1s5p+1ZqlSxGvPuu1JjAXtw36TTXPqE6PCJCuGYOTaoM51UX\nQgdGf6xCvoyZnkCWcXjVP6eavDzWQ92jWLS+FmkCgYAp8kPhJ3daVAnooisawd3q\nbn9dqPp6sEAnDJLmf5sxNKmsu7AUJ9Yky+q787q8JgC9gIo1VVmctd6cmuLBUzcP\n2q9k+EXR32ku1z5iR5m2JKLs9TdF8aRqtb4ByBviM7+6GWAo5KTrUgHEWPBq5mph\nCuk1GjqyL4uXEsZAMIEh9QKBgHvMVBN3eDCff/W94/XUvI/1Jlgh1qKGgvDZxwMD\nj7uapFYvnkLJi2kyrzMADZnhCLVLxbH7T6HI3oWzsb+PiHO7N32seho/BW6j/UGD\nYmL548iFCH0VDlY7d4LODQ9mF7TKfAM0ONYLFjLvw4t5Tcosr7XB32nNmcuPVuD2\nbbNxAoGAQxRpOv8M88YRYt+UqmIdAs6pq7AKicadfWabotb1VkRC/te6ZJEpT8eq\nqPJSU6TlFaIyJjtMs43vy9EaygCmnSqzrRwhAoX95W4QF0j9mRd69wykRyj/1D6d\nehDEh5j9yWsKDM+oy1Gf4hPJkdCrYn/sRIVQjMDBrG9LiLou7SE=\n-----END RSA PRIVATE KEY-----'
 
-import socket
 import sys
-from crypto import encrypt_RSA, decrypt_RSA
+from crypto import encrypt_RSA, decrypt_RSA, sign_data, verify_sign
 import time
 import ipgetter
 import cPickle as pickle
 import ipaddr
 import socket, struct
 from netaddr import *
+
+def checkIPandCovertToPublicIfNeeded(IPAddrOfClient, clientIP, publicIp, serverIP):
+    if (not (clientIP.is_unicast() and not clientIP.is_private() and serverIP.is_multicast() and not serverIP.is_private())):
+        # if server is private, it must be in the same ip range as client. Else no possible to connect to server
+        #if client is private, server is private, dont use public ip for client
+        #else if client is public, server is public, use public ip for client
+        IPAddrOfClient = IPAddress(publicIp)
+
+    return IPAddrOfClient
+
+def checkAuthencityOfMsg(data_signed, data_enc):
+    if (verify_sign(server_public_key, data_signed, data_enc)):
+        print "Server is authentic"
+        return True
+    else:
+        print "Server is not authentic"
+        return False
+
+
+def checkNonceFreshness(nonce, reply_nonceClient):
+    if (reply_nonceClient == nonce):  # not fresh
+        print 'nonce is fresh'
+        return True
+    else:
+        return False
+
 
 def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKey):
     global SERVER, KNOCK_PORT, s, msg, d, data, addr, reply
@@ -21,12 +44,11 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKey):
     nonce = int(time.time())
     publicIp = ipgetter.myip()
     IPAddrOfClient = socket.gethostbyname(socket.getfqdn())
-    client_private_key = clientPteKey
+    #client_private_key = clientPteKey
 
-    ip = IPAddress(IPAddrOfClient)
-    if (not (ip.is_unicast() and not ip.is_private())):
-        IPAddrOfClient = IPAddress(publicIp)
-
+    clientIP = IPAddress(IPAddrOfClient)
+    serverIP = IPAddress(SERVER)
+    IPAddrOfClient = checkIPandCovertToPublicIfNeeded(IPAddrOfClient, clientIP, publicIp, serverIP)
 
     # Datagram (udp) socket
     try:
@@ -36,39 +58,42 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKey):
         print 'Failed to create socket. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
         #sys.exit()
         return False
+    print 'Connected'
 
-    # Bind socket to local host and port
-    try:
-        s.bind((SERVER, KNOCK_PORT))
-    except socket.error, msg:
-        print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
-        #sys.exit()
-        return False
+    #first comms] C->S
+    payload = pickle.dumps([user, typeOfRequest, str(IPAddrOfClient), portToOpen, otp, nonce])
+    encrypted_payload = encrypt_RSA(server_public_key, payload)
+    signed_payload = sign_data(client_private_key, encrypted_payload)
+    final_payload = pickle.dumps([encrypted_payload,signed_payload])
+    s.sendto(final_payload, (SERVER, KNOCK_PORT))
 
-    print 'Socket bind complete'
-
-    #first comms
-    payload = [user, IPAddrOfClient, portToOpen, otp, nonce];
-    msg = raw_input(pickle(payload))  #serialize the payload
-    msg = encrypt_RSA(server_public_key, msg)
-    s.sendto(msg, (SERVER, KNOCK_PORT))
-
-    #second comms
+    #second comms S-> C
     # receive data from server (data, addr)
     d = s.recvfrom(1024)
     data = d[0]
     addr = d[1]
-    data = decrypt_RSA(server_public_key, data)
 
-    if not (data == nonce):  #not fresh
-        return False
+    reply_data = pickle.loads(data)
+    reply_data_enc = reply_data[0]
+    reply_data_signed = reply_data[1]
+    reply_data_plain = decrypt_RSA(client_private_key, reply_data_enc)
+    reply_data_plain = pickle.loads(reply_data_plain)
+    reply_nonceClient = reply_data_plain[0]
+    reply_nonceServer = reply_data_plain[1]
 
-    #third comms
-    reply = nonce
-    reply = encrypt_RSA(client_private_key, reply)  #this complete two way identity proofing
-    s.sendto(reply, addr)
-    print 'Message[' + addr[0] + ':' + str(addr[1]) + '] - ' + data.strip()
+    isServerAuthentic = checkAuthencityOfMsg(reply_data_signed, reply_data_enc)
+    isNonceFresh = checkNonceFreshness(nonce, reply_nonceClient)
+
+    #third comms C->S
+    reply = pickle.dumps(reply_nonceServer)
+    reply2_enc = encrypt_RSA(server_public_key, reply)
+    reply2_signed = sign_data(client_private_key, reply2_enc)
+    reply2_payload = [reply2_enc, reply2_signed ]
+    reply2_payload = pickle.dumps(reply2_payload)
+    s.sendto(reply2_payload, addr)
     s.close()
+    print "connection closed"
     return True
 
-talkToServer()
+talkToServer("CLOSED", "JOHN", "127.0.0.1", "21", "123456", "no key")
+
