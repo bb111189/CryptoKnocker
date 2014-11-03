@@ -27,7 +27,7 @@ class KeyGeneratorUI(QtGui.QMainWindow):
         privFileName = "./keys/private/" + userName + ".key"
         pubFileName = "./keys/public/" + userName + ".key"
 
-        rsakeys = RSA.generate(4096)
+        rsakeys = RSA.generate(2048)
         privHandle = open(privFileName, 'wb')
         privHandle.write(rsakeys.exportKey())
         privHandle.close()
