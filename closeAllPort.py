@@ -10,6 +10,7 @@ INTERNAL_IN_PORT = 8000
 def add_input_rule_to_filter(rule):
     chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "INPUT")
     chain.insert_rule(rule)
+    return
 
 
 # Block all incoming from external
@@ -19,6 +20,7 @@ def block_ext_in_traffic():
     rule.out_interface = "eth0"
     rule.target = iptc.Target(rule, "DROP")
     add_input_rule_to_filter(rule)
+    return
 
 
 # Allow client to send initial packet to server
@@ -26,12 +28,13 @@ def allow_ext_single_port():
     rule = iptc.Rule()
     rule.in_interface = "wlan0"
     rule.out_interface = "eth0"
-    rule.protocol = "tcp"
-    match = iptc.Match(rule, "tcp")
+    rule.protocol = "udp"
+    match = iptc.Match(rule, "udp")
     match.dport = "%d" % EXTERNAL_IN_PORT
     rule.add_match(match)
     rule.target = iptc.Target(rule, "ACCEPT")
     add_input_rule_to_filter(rule)
+    return
 
 
 # Allow loopback
@@ -40,6 +43,7 @@ def allow_loopback():
     rule.in_interface = "lo"
     rule.target = iptc.Target(rule, "ACCEPT")
     add_input_rule_to_filter(rule)
+    return
 
 
 # Allow internal server web UI
@@ -52,6 +56,8 @@ def allow_server_traffic():
     rule.add_match(match)
     rule.target = iptc.Target(rule, "ACCEPT")
     add_input_rule_to_filter(rule)
+    return
+
 
 block_ext_in_traffic()
 allow_loopback()
