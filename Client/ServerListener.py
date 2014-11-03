@@ -135,7 +135,7 @@ while(1) :
         print "Operation: " + data_plain[1]
         #Call teye script to open or close port.
         #data_plain[1] is the type of operation, open or close
-        #data_plain[2] is the ip address, provide by user, verified with header
+        #data_plain[2] is the ip address, obtained from clientComms scriptr, verified with header
         #data_plain[3] is the port, to open or closed
 
     except socket.error, msg:

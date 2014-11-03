@@ -8,8 +8,8 @@ import socket
 import sys
 from crypto import encrypt_RSA, decrypt_RSA
 
-HOST = ''    # Symbolic name meaning all available interfaces
-PORT = 8888    # Arbitrary non-privileged port
+SERVER = ''    # Symbolic name meaning all available interfaces
+KNOCK_PORT = 8888    # Arbitrary non-privileged port
 
 # Datagram (udp) socket
 try :
@@ -22,7 +22,7 @@ except socket.error, msg :
 
 # Bind socket to local host and port
 try:
-    s.bind((HOST, PORT))
+    s.bind((SERVER, KNOCK_PORT))
 except socket.error , msg:
     print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
     sys.exit()

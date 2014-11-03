@@ -3,6 +3,7 @@ from PyQt4 import QtCore, QtGui
 from clientUI import Ui_CrytoKnocker
 from keyGeneratorUI import KeyGeneratorUI
 import ConfigParser
+import clientComms
 
 class StartQT4(QtGui.QMainWindow):
     def setIconImage(self):
@@ -30,7 +31,7 @@ class StartQT4(QtGui.QMainWindow):
         port =  str(self.ui.PortField.text())
         OTP = str(self.ui.OTPField.text())
 
-        self.sendKnocks(user)
+        self.sendKnocks(user, server, port, OTP)
 
     def lockServer(self):
         user =  str(self.ui.UserField.text())
@@ -38,26 +39,31 @@ class StartQT4(QtGui.QMainWindow):
         port =  str(self.ui.PortField.text())
         OTP = str(self.ui.OTPField.text())
 
-        self.sendLocks(user)
+        self.sendLocks(user, server, port, OTP)
 
-    def sendKnocks(self, user):
+    def sendKnocks(self, user, server,  port, otp):
         if self.isUserExists("User private key", user):
-            UserPteKey = self.GetUserPublicKey("User private key")[user]
-            print UserPteKey
+            UserPteKeyPath = self.GetUserPublicKey("User private key")[user]
+            print UserPteKeyPath
 
-            # Meed to pass to nich script with the following parameter: User, Server, Port, OTP, User's private key
-            self.printToScreen("Port Open")
-
+            status = clientComms.talkToServer("OPEN", user, server, port, otp, UserPteKeyPath)
+            if(status == True):
+                self.printToScreen("Port Open")
+            else:
+                self.printToScreen("Error. Please try again")
         else:
             self.printToScreen("No such user")
 
-    def sendLocks(self, user):
+    def sendLocks(self, user, server,  port, otp):
         if self.isUserExists("User private key", user):
-            UserPteKey = self.GetUserPublicKey("User private key")[user]
-            print UserPteKey
+            UserPteKeyPath = self.GetUserPublicKey("User private key")[user]
+            print UserPteKeyPath
 
-            # Meed to pass to nich script with the following parameter: User, Server, Port, OTP, User's private key
-            self.printToScreen("Port closed")
+            status = clientComms.talkToServer("CLOSED", user, server, port, otp, UserPteKeyPath)
+            if(status == True):
+                self.printToScreen("Port Closed")
+            else:
+                self.printToScreen("Error. Please try again")
 
         else:
             self.printToScreen("No such user")

@@ -10,6 +10,7 @@ import cPickle as pickle
 import ipaddr
 import socket, struct
 from netaddr import *
+from Crypto.PublicKey import RSA
 
 def checkIPandCovertToPublicIfNeeded(IPAddrOfClient, clientIP, publicIp, serverIP):
     if (not (clientIP.is_unicast() and not clientIP.is_private() and serverIP.is_multicast() and not serverIP.is_private())):
@@ -28,7 +29,6 @@ def checkAuthencityOfMsg(data_signed, data_enc):
         print "Server is not authentic"
         return False
 
-
 def checkNonceFreshness(nonce, reply_nonceClient):
     if (reply_nonceClient == nonce):  # not fresh
         print 'nonce is fresh'
@@ -36,15 +36,15 @@ def checkNonceFreshness(nonce, reply_nonceClient):
     else:
         return False
 
-
-def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKey):
+def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKeyPath):
     global SERVER, KNOCK_PORT, s, msg, d, data, addr, reply
     SERVER = server
     KNOCK_PORT = 8888
     nonce = int(time.time())
     publicIp = ipgetter.myip()
     IPAddrOfClient = socket.gethostbyname(socket.getfqdn())
-    #client_private_key = clientPteKey
+
+    client_private_key = open(clientPteKeyPath, "r").read()
 
     clientIP = IPAddress(IPAddrOfClient)
     serverIP = IPAddress(SERVER)
@@ -95,5 +95,5 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKey):
     print "connection closed"
     return True
 
-talkToServer("CLOSED", "JOHN", "127.0.0.1", "21", "123456", "no key")
+#talkToServer("CLOSED", "JOHN", "127.0.0.1", "21", "123456", "no key") For debugging only.
 
