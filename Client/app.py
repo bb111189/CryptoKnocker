@@ -44,31 +44,24 @@ class StartQT4(QtGui.QMainWindow):
         self.sendLocks(user, server, port, OTP)
 
     def sendKnocks(self, user, server,  port, otp):
-        if self.isUserExists("User private key", user):
+        if self.isUserExists("User private key", user) and self.isPortNoValid(port) and self.isOTPValid(otp):
             UserPteKeyPath = self.GetUserPublicKey("User private key")[user]
-            print UserPteKeyPath
 
             status = clientComms.talkToServer("OPEN", user, server, port, otp, UserPteKeyPath)
             if(status == True):
-                self.printToScreen("Port Open")
+                self.printToScreen("Port knock request sent")
             else:
                 self.printToScreen("Error. Please try again")
-        else:
-            self.printToScreen("No such user")
 
     def sendLocks(self, user, server,  port, otp):
-        if self.isUserExists("User private key", user):
+        if self.isUserExists("User private key", user) and self.isPortNoValid(port) and self.isOTPValid(otp):
             UserPteKeyPath = self.GetUserPublicKey("User private key")[user]
-            print UserPteKeyPath
 
             status = clientComms.talkToServer("CLOSED", user, server, port, otp, UserPteKeyPath)
             if(status == True):
-                self.printToScreen("Port Closed")
+                self.printToScreen("Port lock request sent")
             else:
                 self.printToScreen("Error. Please try again")
-
-        else:
-            self.printToScreen("No such user")
 
     def openKeyGen(self):
         self.keygenWindow = KeyGeneratorUI(self)
@@ -82,7 +75,11 @@ class StartQT4(QtGui.QMainWindow):
         Config = ConfigParser.ConfigParser()
         Config.read("user.ini")
         options = Config.options(section)
-        return user in options
+        if (user in options):
+            return True
+        else:
+            self.printToScreen("No such user")
+            return False
 
     def GetUserPublicKey(self, section):
         Config = ConfigParser.ConfigParser()
@@ -96,9 +93,35 @@ class StartQT4(QtGui.QMainWindow):
                 dict1[option] = None
         return dict1
 
+    def isPortNoValid(self, portNo):
+        try:
+            portNo = int(portNo)
+        except:
+            self.printToScreen("Invalid port number")
+            return False
+
+        if(1 <= portNo  and portNo < 65535):
+            return  True
+        else:
+            self.printToScreen("Invalid port number")
+            return False
+
+    def isOTPValid(self, OTP):
+        try:
+            OTP = int(OTP)
+        except:
+            self.printToScreen("Invalid OTP")
+            return False
+
+        if (0 <= OTP and OTP <= 999999):
+            return True
+        else:
+            self.printToScreen("Invalid OTP")
+            return False
+
     def printToScreen(self, text):
         self.ui.label_6.setText(text)
-        QtCore.QTimer.singleShot(3500, self.hideLabelText)
+        #QtCore.QTimer.singleShot(3500, self.hideLabelText)
 
     def hideLabelText(self):
         self.ui.label_6.setText("")

@@ -42,9 +42,13 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKeyPath)
 
     client_private_key = open(clientPteKeyPath, "r").read()
 
-    clientIP = IPAddress(IPAddrOfClient)
-    serverIP = IPAddress(SERVER)
-    IPAddrOfClient = checkIPandCovertToPublicIfNeeded(IPAddrOfClient, clientIP, publicIp, serverIP)
+    try:
+        clientIP = IPAddress(IPAddrOfClient)
+        serverIP = IPAddress(SERVER)
+        IPAddrOfClient = checkIPandCovertToPublicIfNeeded(IPAddrOfClient, clientIP, publicIp, serverIP)
+    except:
+        return False
+
 
     # Datagram (udp) socket
     try:
@@ -56,43 +60,53 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKeyPath)
         return False
     print 'Connected'
 
-    #first comms] C->S
-    payload = pickle.dumps([user, typeOfRequest, str(IPAddrOfClient), portToOpen, otp, nonce])
-    encrypted_payload = encrypt_RSA(server_public_key, payload)
-    signed_payload = sign_data(client_private_key, encrypted_payload)
-    final_payload = pickle.dumps([encrypted_payload,signed_payload])
-    s.sendto(final_payload, (SERVER, KNOCK_PORT))
+    try:
+        #first comms] C->S
+        payload = pickle.dumps([user, typeOfRequest, str(IPAddrOfClient), portToOpen, otp, nonce])
+        encrypted_payload = encrypt_RSA(server_public_key, payload)
+        signed_payload = sign_data(client_private_key, encrypted_payload)
+        final_payload = pickle.dumps([encrypted_payload,signed_payload])
+        s.sendto(final_payload, (SERVER, KNOCK_PORT))
 
-    #second comms S-> C
-    # receive data from server (data, addr)
-    d = s.recvfrom(1024)
-    data = d[0]
-    addr = d[1]
+        #second comms S-> C
+        # receive data from server (data, addr)
+        d = s.recvfrom(1024)
+        data = d[0]
+        addr = d[1]
 
-    if not data:
+        if not data:
+            return False
+
+        reply_data = pickle.loads(data)
+        reply_data_enc = reply_data[0]
+        reply_data_signed = reply_data[1]
+        reply_data_plain = decrypt_RSA(client_private_key, reply_data_enc)
+        reply_data_plain = pickle.loads(reply_data_plain)
+        reply_nonceClient = reply_data_plain[0]
+        reply_nonceServer = reply_data_plain[1]
+
+        isServerAuthentic = checkAuthencityOfMsg(reply_data_signed, reply_data_enc)
+        isNonceFresh = checkNonceFreshness(nonce, reply_nonceClient)
+
+        if (not (isServerAuthentic and isNonceFresh)):
+            print "nonce stale or server not authentic"
+            return False
+
+        #third comms C->S
+        reply = pickle.dumps(reply_nonceServer)
+        reply2_enc = encrypt_RSA(server_public_key, reply)
+        reply2_signed = sign_data(client_private_key, reply2_enc)
+        reply2_payload = [reply2_enc, reply2_signed ]
+        reply2_payload = pickle.dumps(reply2_payload)
+        s.sendto(reply2_payload, addr)
+        s.close()
+        print "connection closed"
+        return True
+
+    except socket.error, msg:
+        print 'Failed during communication. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
+        #sys.exit()
         return False
-
-    reply_data = pickle.loads(data)
-    reply_data_enc = reply_data[0]
-    reply_data_signed = reply_data[1]
-    reply_data_plain = decrypt_RSA(client_private_key, reply_data_enc)
-    reply_data_plain = pickle.loads(reply_data_plain)
-    reply_nonceClient = reply_data_plain[0]
-    reply_nonceServer = reply_data_plain[1]
-
-    isServerAuthentic = checkAuthencityOfMsg(reply_data_signed, reply_data_enc)
-    isNonceFresh = checkNonceFreshness(nonce, reply_nonceClient)
-
-    #third comms C->S
-    reply = pickle.dumps(reply_nonceServer)
-    reply2_enc = encrypt_RSA(server_public_key, reply)
-    reply2_signed = sign_data(client_private_key, reply2_enc)
-    reply2_payload = [reply2_enc, reply2_signed ]
-    reply2_payload = pickle.dumps(reply2_payload)
-    s.sendto(reply2_payload, addr)
-    s.close()
-    print "connection closed"
-    return True
 
 #talkToServer("CLOSED", "JOHN", "127.0.0.1", "21", "123456", "no key") For debugging only.
 
