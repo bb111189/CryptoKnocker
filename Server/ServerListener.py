@@ -8,6 +8,9 @@ import sys
 import cPickle as pickle
 import time
 import random
+import openServicePort
+import closeIndividualPort
+
 
 from libs.crypto import encrypt_RSA, decrypt_RSA, sign_data, verify_sign
 
@@ -139,6 +142,10 @@ while(1) :
         #data_plain[0] is the type of operation, open or close
         #data_plain[2] is the ip address, obtained from clientComms scriptr, verified with header
         #data_plain[3] is the port, to open or closed
+        if data_plain[0] == "open":
+            openServicePort.open_service_port(data_plain[2], int(data_plain[3]))
+        else:
+            closeIndividualPort.close_service_port(data_plain[2], int(data_plain[3]))
 
     except socket.error, msg:
         print 'Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
