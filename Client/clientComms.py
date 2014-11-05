@@ -58,7 +58,7 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKeyPath)
         print 'Failed to create socket. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
         #sys.exit()
         return False
-    print 'Connected'
+    print 'Connecting...'
 
     try:
         #first comms] C->S
@@ -70,7 +70,9 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKeyPath)
 
         #second comms S-> C
         # receive data from server (data, addr)
+        s.settimeout(5.0)
         d = s.recvfrom(1024)
+
         data = d[0]
         addr = d[1]
 
@@ -103,10 +105,14 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKeyPath)
         print "connection closed"
         return True
 
+    except socket.timeout, msg:
+        print "Connection Timeout"
+        return False
     except socket.error, msg:
-        print 'Failed during communication. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
+        print 'Failed during communication. Error Code : ' + str(msg)
         #sys.exit()
         return False
+
 
 #talkToServer("CLOSED", "JOHN", "127.0.0.1", "21", "123456", "no key") For debugging only.
 
