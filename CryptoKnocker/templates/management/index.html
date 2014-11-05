@@ -69,7 +69,24 @@
                 //just wait for animation to finish
             });
         });
+
+        {% if pageType == "overview" %}
+        pollLatestOverview();
+
+        function pollLatestOverview(){
+            var url = "getPorts/";
+            var getting = $.get(url);
+            getting.success(function(data){
+                console.log("got latest port profile");
+                $('.content').html(data);
+                setTimeout(pollLatestOverview, 2000);
+            });
+
+
+        }
+        {% endif %}
     });
+
 </script>
 </body>
 </html>

@@ -1,37 +1,44 @@
 {%if portSet == False %}
-    <div align="center"><h4>No port to monitor</h4></div>
+<div align="center"><h4>No open ports</h4></div>
 {%else%}
-    <!--Avatar List-->
-    <div class="col-lg-1"></div>
-    <div class="col-lg-10">
-        <table class="table table-striped">
-            {{portSet.management_form}}
-            <thead>
-            <tr>
-                {%with portSet|first as form%}
-                    {%for field in form.visible_fields%}
-                        <th>{{field.label_tag}}</th>
-                    {%endfor%}
-                {%endwith%}
-            </tr>
-            </thead>
-            <tbody>
-            {%for form in portSet%}
-                <tr>
-                    {{ form.id }}
-                    {%for field in form.visible_fields%}
+<!--Avatar List-->
+<div class="col-lg-1"></div>
+<div class="col-lg-10">
+    <table class="table table-striped">
+        {{portSet.management_form}}
+        <thead>
+        <tr>
+            {%with portSet|first as form%}
+            {%for field in form.visible_fields%}
+            <th>{{field.label_tag}}</th>
+            {%endfor%}
+            {%endwith%}
 
-                        <td>{{field.value}}</td>
+        </tr>
 
-                    {%endfor%}
+        </thead>
+        <tbody>
+        {%for form in portSet%}
+        <tr class="port-row">
+            {{ form.id }}
+            {%for field in form.visible_fields%}
 
-                    <td></td>
-                    <td></td>
-                </tr>
-            {% endfor%}
-            </tbody>
-        </table>
-    </div>
-    <div class="col-lg-1"></div>
-    <!--End of Avatar List-->
+            {%if field.name == "status" and field.value == "open"%}
+            <td class="alert-success">
+                <b>{{field.value}}</b>
+            </td>
+            {%elif field.name == "status" and field.value == "close"%}
+            <td class="alert-warning"><b>{{field.value}}</b></td>
+            {%else%}
+            <td>{{field.value}}</td>
+            {%endif%}
+            {%endfor%}
+
+        </tr>
+        {% endfor%}
+        </tbody>
+    </table>
+</div>
+<div class="col-lg-1"></div>
+<!--End of Avatar List-->
 {%endif%}

@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
+from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -16,4 +17,8 @@ urlpatterns = patterns('',
     url(r'^logout/$', "management.views.user_logout"),
     url(r'^management/registration/$', "management.views.registration"),
     url(r'^management/keys/$', "management.views.manageKeys"),
+    url(r'^management/keys/changeKey$', "management.views.changeKey"),
+    url(r'^management/getPorts/$', "management.views.getPorts"),
+    url(r'^(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT})
+
 )

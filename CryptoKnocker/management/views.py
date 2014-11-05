@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from django.shortcuts import render, render_to_response, HttpResponseRedirect
+from django.shortcuts import render, render_to_response, HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.forms.models import modelformset_factory
@@ -8,7 +8,9 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from models import portProfileList, portProfile
-
+from django.conf import settings
+from os.path import join
+from libs.crypto import generate_RSA
 
 # Create your views here.
 
@@ -20,7 +22,7 @@ def index(request):
     :param request:
     :return:
     '''
-    portSet = __list_ports('publicKey')
+    portSet = __list_ports(False,'publicKey')
     just_logged_in = False
     #isFirstLogin = request.user.first_name
     isFirstLogin = False
@@ -36,7 +38,7 @@ def user_login(request):
     '''
     #isFirstLogin = request.user.first_name
     isFirstLogin = False
-    portSet = __list_ports('publicKey')
+    portSet = __list_ports(False,'publicKey')
     just_logged_in = True
 
     return render_to_response("management/index.html",{"portSet":portSet, "pageType":"overview", "just_logged_in":just_logged_in, "isFirstLogin":isFirstLogin},context_instance=RequestContext(request))
@@ -68,7 +70,7 @@ def registration(request):
 
         if user_form.is_valid():
             profile = __save_to_database(user_form)
-            portSet = __list_ports()
+            #portSet = __list_ports(True)
 
             #generate QR CODE here
 
@@ -87,7 +89,7 @@ def manageKeys(request):
         profile = portProfile.objects.filter(id=id_value).delete()
         return HttpResponseRedirect("/management/keys/")
 
-    portSet = __list_ports()
+    portSet = __list_ports(True)
     return render_to_response("management/index.html",{"portSet":portSet, "pageType":"manageKeys"},context_instance=RequestContext(request))
 
 
@@ -102,7 +104,7 @@ def __save_to_database(user_form):
     profile.save()
     return profile
 
-def __list_ports(*exclusion):
+def __list_ports(everything,*exclusion):
     '''
     Private method
     Get all objects from management.portProfile table
@@ -113,10 +115,35 @@ def __list_ports(*exclusion):
         exclude=(exclusion),
         labels=portProfileList.Meta.labels
     )
+    if everything:
+        portSet = profile_formset(queryset=portProfile.objects.all())
+    else:
+        portSet = profile_formset(queryset=portProfile.objects.all().filter(status="open").order_by('-status'))
 
-    portSet = profile_formset(queryset=portProfile.objects.all())
     if len(portSet) == 1:
         return False
     else:
         portSet = portSet[:-1] #remove last result which is None. (A problem with django)
         return portSet
+
+@login_required()
+def getPorts(request):
+    portSet = __list_ports(False,'publicKey')
+
+    return render_to_response("management/listPorts.html",{"portSet":portSet},context_instance=RequestContext(request))
+
+@login_required()
+def changeKey(request):
+    keyPair = generate_RSA()
+    privateKey = keyPair[0]
+    publicKey = keyPair[1]
+
+    file = open(join(settings.MEDIA_ROOT,"server_public.key"), "r+")
+    file.writelines(publicKey)
+    file.close()
+
+    file2 = open(join(settings.MEDIA_ROOT,"server_private.key"), "r+")
+    file2.writelines(privateKey)
+    file2.close()
+
+    return manageKeys(request)

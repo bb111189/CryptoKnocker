@@ -1,42 +1,54 @@
 {%if portSet == False %}
-    <div align="center"><h4>No port to manage</h4></div>
+<div align="center"><h4>No port to manage</h4></div>
 {%else%}
-    <!--Avatar List-->
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
-        <table class="table table-striped">
-            {{portSet.management_form}}
-            <thead>
-            <tr>
-                {%with portSet|first as form%}
-                    {%for field in form.visible_fields%}
-                        <th>{{field.label_tag}}</th>
-                    {%endfor%}
-                {%endwith%}
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            {%for form in portSet%}
-                <tr>
-                    <form method="post" action=""> {% csrf_token %}
-                        <input id="form_id" name="form_id" type="hidden" value="{{ form.id.value }}">
-                        {%for field in form.visible_fields%}
 
-                            <td>{{field.value}}</td>
-                        {%endfor%}
+<div class="col-lg-3"></div>
+<div class="col-lg-6">
+    <table class="table table-striped">
+        {{portSet.management_form}}
+        <thead>
+        <tr>
+            {%with portSet|first as form%}
+            {%for field in form.visible_fields%}
+            <th>{{field.label_tag}}</th>
+            {%endfor%}
+            {%endwith%}
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%for form in portSet%}
+        <tr>
+            <form method="post" action=""> {% csrf_token %}
+                <input id="form_id" name="form_id" type="hidden" value="{{ form.id.value }}">
+                {%for field in form.visible_fields%}
 
-                        <td>
-                            <button type="submit" class="submit-user btn btn-info">
-                                Remove
-                            </button>
-                        </td>
-                    </form>
-                </tr>
-            {% endfor%}
-            </tbody>
-        </table>
+                <td>{{field.value}}</td>
+                {%endfor%}
+
+                <td>
+                    <button type="submit" class="submit-user btn btn-info">
+                        Remove
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {% endfor%}
+        </tbody>
+    </table>
+
+
+    <div>
+        <div align="center">
+            <a href="{{ MEDIA_URL  }}/server_public.key" class="btn btn-primary">Download Server Public Key</a>
+            <a href="changeKey" class="btn btn-primary" id="changeKey" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-refresh"></span> Change Server Key Pair</a>
+            <p><b>Note:</b> Changing of server key pair requires all client to download new server's public key</p>
+        </div>
     </div>
-    <div class="col-lg-3"></div>
-    <!--End of Avatar List-->
+
+</div>
+
+
+
+<div class="col-lg-3"></div>
 {%endif%}

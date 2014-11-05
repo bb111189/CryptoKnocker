@@ -10,7 +10,7 @@ class portProfile(models.Model):
     userID = models.CharField(max_length=50, blank=False)
     port = models.PositiveIntegerField(max_length=5, blank=False)
     serviceName = models.CharField(max_length="20", blank=False)
-    publicKey = models.FileField(blank=False, upload_to="./publickeys/")
+    publicKey = models.FileField(blank=False, upload_to="./client_public_key/")
     status = models.CharField(max_length=5, blank=False, default="close")
 
     class Meta:
