@@ -147,12 +147,12 @@ while(1) :
             service_port = data_plain[3]
 
             if (isUserAuthentic and isServerNonceFresh):
-                if port_operation == "open":
+                if port_operation == "OPEN":
                     open_service_port(client_ip,service_port)
                     set_port_status(int(service_port),"open")
                     portlog.log_port_status(service_port, port_operation, username, client_ip)
 
-                elif port_operation == "close":
+                elif port_operation == "CLOSE":
                     close_service_port(client_ip, service_port)
                     set_port_status(int(service_port),"close")
                     portlog.log_port_status(service_port, port_operation, username, client_ip)
