@@ -8,6 +8,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from models import portProfileList, portProfile
+from libs.pyg2fa import qrCodeURL, validate
 
 
 # Create your views here.
@@ -71,8 +72,10 @@ def registration(request):
             portSet = __list_ports()
 
             #generate QR CODE here
+            randomSeed = "KKK67SDNLXIOG65U" #random 16 digit base 32 no # store this inside DB hardcode first
+            QRCodeURL = qrCodeURL("CryptoKnocker", randomSeed) ## url for qr code. Basically user need to key in this rando
 
-            return render_to_response("management/index.html",{"pageType":"qrcode"},context_instance=RequestContext(request))
+            return render_to_response("management/index.html",{"pageType":"qrcode", 'QRCodeURL': QRCodeURL},context_instance=RequestContext(request))
         else:
             return render_to_response("management/index.html",{"pageType":"registration", "user_form":user_form},context_instance=RequestContext(request))
     user_form = portProfileList()
