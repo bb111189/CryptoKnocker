@@ -2,6 +2,7 @@ import sys
 from PyQt4 import QtCore, QtGui
 from clientUI import Ui_CrytoKnocker
 from keyGeneratorUI import KeyGeneratorUI
+from ServerKeyDialog import ServerKeyDialog
 import ConfigParser
 import clientComms
 
@@ -20,10 +21,11 @@ class StartQT4(QtGui.QMainWindow):
         self.ui = Ui_CrytoKnocker()
         self.ui.setupUi(self)
         self.setIconImage()
-        self.ui.Knock.clicked.connect(self.knockServer);
-        self.ui.Lock.clicked.connect(self.lockServer);
-        self.ui.actionAdd_Private_Key.triggered.connect(self.openKeyGen);
-        self.ui.actionExit.triggered.connect(QtGui.qApp.quit);
+        self.ui.Knock.clicked.connect(self.knockServer)
+        self.ui.Lock.clicked.connect(self.lockServer)
+        self.ui.actionAdd_Private_Key.triggered.connect(self.openKeyGen)
+        self.ui.actionAdd_Server_Public_Key.triggered.connect(self.openAddServerKey)
+        self.ui.actionExit.triggered.connect(QtGui.qApp.quit)
 
     def knockServer(self):
         user =  str(self.ui.UserField.text())
@@ -71,6 +73,10 @@ class StartQT4(QtGui.QMainWindow):
     def openKeyGen(self):
         self.keygenWindow = KeyGeneratorUI(self)
         self.keygenWindow.show()
+
+    def openAddServerKey(self):
+        self.addServerKeyWindow = ServerKeyDialog(self)
+        self.addServerKeyWindow.show()
 
     def isUserExists(self, section, user):
         Config = ConfigParser.ConfigParser()
