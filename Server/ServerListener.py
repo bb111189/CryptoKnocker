@@ -8,9 +8,10 @@ import sys
 import cPickle as pickle
 import time
 import random
+import openServicePort
+import closeIndividualPort
 
 from libs.crypto import encrypt_RSA, decrypt_RSA, sign_data, verify_sign
-
 
 SERVER = 'localhost'
 #SERVER = '192.168.2.144'
@@ -137,10 +138,10 @@ while(1) :
 
             if (isUserAuthentic and isServerNonceFresh):
                 print "Operation: " + data_plain[1]
-                #Call teye script to open or close port.
-                #data_plain[0] is the type of operation, open or close
-                #data_plain[2] is the ip address, obtained from clientComms scriptr, verified with header
-                #data_plain[3] is the port, to open or closed
+                if data_plain[1] == "OPEN":
+                    openServicePort.open_service_port(data_plain[2], int(data_plain[3]))
+                else:
+                    closeIndividualPort.close_service_port(data_plain[2], int(data_plain[3]))
             else:
                 print "port not opened" #do nth. silent
 
@@ -148,4 +149,4 @@ while(1) :
         print 'Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
         #sys.exit()
     except:
-        #do nth. loop again
+        print 'Error Code'
