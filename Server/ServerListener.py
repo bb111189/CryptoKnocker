@@ -7,6 +7,7 @@ import sys
 import cPickle as pickle
 import time
 import random
+import os
 
 from libs.crypto import encrypt_RSA, decrypt_RSA, sign_data, verify_sign
 from libs.cryptoknocker_db import get_public_key_path, set_port_status
@@ -105,15 +106,19 @@ while(1) :
         data_plain = decrypt_RSA(server_private_key, data_enc)
         data_plain = pickle.loads(data_plain)
 
-        username = data_plain[1]
-        client_public_key = get_public_key_path(username)
+        username = data_plain[0]
+        client_public_key_path = get_public_key_path(username)[0]
+        client_public_key_path = client_public_key_path.encode('utf-8')
+        client_public_key_path = '../CryptoKnocker/' + client_public_key_path
+        client_public_key_path = os.path.abspath(client_public_key_path)
+        client_private_key = open(client_public_key_path, "r").read()
 
         isUserAuthentic = checkAuthencityOfMsg(data_signed, data_enc)
         isIPReal = checkIPMatches(addr, data_plain)
         nonceClient = data_plain[5]
         isNonceFresh = checkNonceFreshness(nonceClient)
-        #check otp
 
+        #check otp
         if (isUserAuthentic and isIPReal and isNonceFresh):
             #second comms
             nonceServer = random.randint(100000000, 999999999)
@@ -126,6 +131,7 @@ while(1) :
             s.sendto(reply_payload , addr)
 
             #third comms
+            s.settimeout(5.0)
             d = s.recvfrom(1024)
             data = d[0]
             addr = d[1]
@@ -142,7 +148,7 @@ while(1) :
             isUserAuthentic = checkAuthencityOfMsg(rec_data_signed, rec_data_enc)
             isServerNonceFresh = checkServerNonce(nonceServer, rec_nonceServer)
 
-            port_operation = data_plain[0]
+            port_operation = data_plain[1]
             client_ip = data_plain[2]
             service_port = data_plain[3]
 
@@ -165,8 +171,14 @@ while(1) :
                 print "port not opened" #do nth. silent
 
 
-    except socket.error, msg:
-        print 'Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
+    except socket.error, e:
+        print 'Error Code : ' + str(e[0]) + ' Message ' + e[1]
         #sys.exit()
+    except TypeError, e:
+        #e = sys.exc_info()[0]
+        print e
+        #print 'Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
     except:
-        print 'Error Code'
+        e = sys.exc_info()[0]
+        print e
+        #print 'Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
