@@ -1,7 +1,7 @@
 import sys
 from PyQt4 import QtCore, QtGui
 from clientUI import Ui_CrytoKnocker
-from keyGeneratorUI import KeyGeneratorUI
+from keyGeneratorDialog import KeyGeneratorUI
 from ServerKeyDialog import ServerKeyDialog
 import ConfigParser
 import clientComms
