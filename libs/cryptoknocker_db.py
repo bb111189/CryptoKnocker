@@ -15,9 +15,10 @@ def get_public_key_path(username):
 
     conn = sqlite3.connect(SQLITE_DB_PATH)
     result = conn.execute(QUERY, PARAMETERS)
+    first_result = result.fetchone()
     conn.close()
 
-    return result.fetchone()
+    return first_result
 
 def get_user_allowed_ports(username):
     '''
@@ -30,9 +31,10 @@ def get_user_allowed_ports(username):
 
     conn = sqlite3.connect(SQLITE_DB_PATH)
     result = conn.execute(QUERY, PARAMETERS)
+    results = result.fetchall()
     conn.close()
 
-    return result.fetchall()
+    return results
 
 def doesUsernameExist(username):
     '''
@@ -47,8 +49,47 @@ def doesUsernameExist(username):
     results = conn.execute(query, parameters)
 
     first_result = results.fetchone()
+    conn.close()
 
     if first_result.__contains__(0):
         return False
     else:
         return True
+
+def get_port_serviceName(port):
+    '''
+    Get port's service name
+    :param port: int, port number
+    :return: String, service name
+    '''
+    QUERY = "SELECT serviceName from management_portprofile where port=?"
+    PARAMETER = (port,)
+
+    conn = sqlite3.connect(SQLITE_DB_PATH)
+    result = conn.execute(QUERY,PARAMETER)
+    first_result = result.fetchone()
+    conn.close()
+
+    if len(first_result):
+        return first_result[0]
+
+def set_port_status(port, status):
+    '''
+    Set port status to open or close
+    :param status: string, status of the port
+    :return: boolean, if operation is successful
+    '''
+    try:
+        QUERY = "UPDATE management_portprofile SET status=? where port=?"
+        PARAMETERS = (status, port)
+
+        conn = sqlite3.connect(SQLITE_DB_PATH)
+        result = conn.execute(QUERY, PARAMETERS)
+        conn.close()
+
+        return True
+    except sqlite3.OperationalError as oe:
+        return False
+
+
+
