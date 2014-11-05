@@ -13,9 +13,10 @@ from libs.cryptoknocker_db import get_public_key_path, set_port_status
 from libs.port_operations.openServicePort import open_service_port
 from libs.port_operations.closeIndividualPort import close_service_port
 from libs.logger import PortLog
+import netifaces as ni
 
-SERVER = 'localhost'
-#SERVER = '192.168.2.144'
+#SERVER = 'localhost'
+SERVER = ni.ifaddresses('wlan0')[2][0]['addr']
 
 KNOCK_PORT = 8888
 
