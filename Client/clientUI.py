@@ -105,7 +105,7 @@ class Ui_CrytoKnocker(object):
         QtCore.QMetaObject.connectSlotsByName(CrytoKnocker)
 
     def retranslateUi(self, CrytoKnocker):
-        CrytoKnocker.setWindowTitle(_translate("CrytoKnocker", "CrytoKnocker", None))
+        CrytoKnocker.setWindowTitle(_translate("CrytoKnocker", "CryptoKnocker", None))
         self.label.setText(_translate("CrytoKnocker", "User ID", None))
         self.label_2.setText(_translate("CrytoKnocker", "Server Address", None))
         self.label_3.setText(_translate("CrytoKnocker", "Port", None))

@@ -57,7 +57,7 @@ class StartQT4(QtGui.QMainWindow):
         if self.isUserExists("User private key", user) and self.isPortNoValid(port) and self.isOTPValid(otp):
             UserPteKeyPath = self.GetUserPublicKey("User private key")[user]
 
-            status = clientComms.talkToServer("CLOSED", user, server, port, otp, UserPteKeyPath)
+            status = clientComms.talkToServer("CLOSE", user, server, port, otp, UserPteKeyPath)
             if(status == True):
                 self.printToScreen("Port lock request sent")
             else:
