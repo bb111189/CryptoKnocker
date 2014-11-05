@@ -3,15 +3,17 @@ server_private_key = '-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAnJdl0MKhH
 #server_public_key = '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnJdl0MKhHQt8T9h1hefO\nl+DdBBP1kudIIq+aH7HpBV6aBoIqv0MgsNvIzEGtYF52anvAL7A8bWHulcKibP26\nyx5Jop0liBCZPvl53g4JqSJvhRscVMW0FojpifhJTuiytPbJOACy/Um2DJZVJbnm\nm+40+QUcW61QLfRAKsNthmKjyeX9qAPJhImwie2GHNRDByMCWXDlnb/VS6XTgsZG\nw+2dqOAX7TRIDGAhumZ6RgJY298fxj5XUdQ4vXp9tPc7D1MhIhVR/s/AY/uIVpPg\nYfbzAZ9jgpMEsLckNcr3n6OstOFyMGtPWrRiPzL/SCjl3QkveGuWHAbabu+H9qX7\nKQIDAQAB\n-----END PUBLIC KEY-----'
 client_public_key = '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkSq3EDTiGCnHM8nnwagJ\nsmqnqtgzsja8wKX6P2gr2NcfUtnvDW5jelmfnTuRLwCYcCQ6gpjo5M8KMeLdcbl6\nzB+zadTH5FVAj7DJHiHszx8lBGLLVOjWtR9OvucF13PCZ18SqCvld1WgxStSQWHt\nPsoGAbFdMg8UVRjnQW8MM1tNnI8ZsyFfzXHQTZr4Jn77rw8CZmMgHT5Bd5quE6An\n+mw1HFo2Tkao9ED2zIdU9JDNKvKErQrnDOHyrdWLcYZivrPhTYxqFrbkDRhKF93Y\n20xfLq3vgwWv19saBoNTkMrvBETTYCM0bw3Zm6z0PxcKFLgVMJHtuoFmnmgLxQne\ndwIDAQAB\n-----END PUBLIC KEY-----'
 
-import socket 
+import socket
 import sys
-from crypto import encrypt_RSA, decrypt_RSA, sign_data, verify_sign
 import cPickle as pickle
 import time
 import random
 
-SERVER = 'localhost';
-KNOCK_PORT = 8888;
+from libs.crypto import encrypt_RSA, decrypt_RSA, sign_data, verify_sign
+
+
+SERVER = 'localhost'
+KNOCK_PORT = 8888
 
 typeOfRequest = ''
 user = ''
@@ -134,7 +136,7 @@ while(1) :
 
         print "Operation: " + data_plain[1]
         #Call teye script to open or close port.
-        #data_plain[1] is the type of operation, open or close
+        #data_plain[0] is the type of operation, open or close
         #data_plain[2] is the ip address, obtained from clientComms scriptr, verified with header
         #data_plain[3] is the port, to open or closed
 
