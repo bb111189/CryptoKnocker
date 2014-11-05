@@ -11,6 +11,7 @@ class portProfile(models.Model):
     port = models.PositiveIntegerField(max_length=5, blank=False)
     serviceName = models.CharField(max_length="20", blank=False)
     publicKey = models.FileField(blank=False, upload_to="./publickeys/")
+    status = models.CharField(max_length=5, blank=False, default="close")
 
     class Meta:
         unique_together = ("userID", "port")

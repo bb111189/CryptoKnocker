@@ -1,6 +1,0 @@
- 1| (AvB)>C                         .Premise
- 2|  |_A^B_                         .Assumption
- 3|  | A                            .E^1 2
- 4|  | AvB                          .Iv1 3,B
- 5|  | C                            .E> 4,1
- 6| (A^B)>C                         .I> 2,5

@@ -7,7 +7,7 @@ from django.forms.models import modelformset_factory
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
-from management.models import portProfileList, portProfile
+from models import portProfileList, portProfile
 
 
 # Create your views here.
@@ -20,7 +20,7 @@ def index(request):
     :param request:
     :return:
     '''
-    portSet = __list_ports('userID','publicKey')
+    portSet = __list_ports('publicKey')
     just_logged_in = False
     #isFirstLogin = request.user.first_name
     isFirstLogin = False
@@ -36,7 +36,7 @@ def user_login(request):
     '''
     #isFirstLogin = request.user.first_name
     isFirstLogin = False
-    portSet = __list_ports('userID','publicKey')
+    portSet = __list_ports('publicKey')
     just_logged_in = True
 
     return render_to_response("management/index.html",{"portSet":portSet, "pageType":"overview", "just_logged_in":just_logged_in, "isFirstLogin":isFirstLogin},context_instance=RequestContext(request))
