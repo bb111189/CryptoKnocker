@@ -13,10 +13,7 @@ from netaddr import *
 from Crypto.PublicKey import RSA
 
 def checkIPandCovertToPublicIfNeeded(IPAddrOfClient, clientIP, publicIp, serverIP):
-    if (not (clientIP.is_unicast() and not clientIP.is_private() and serverIP.is_multicast() and not serverIP.is_private())):
-        # if server is private, it must be in the same ip range as client. Else no possible to connect to server
-        #if client is private, server is private, dont use public ip for client
-        #else if client is public, server is public, use public ip for client
+    if ((not serverIP.is_private()) and clientIP.is_private()):
         IPAddrOfClient = IPAddress(publicIp)
 
     return IPAddrOfClient
@@ -72,6 +69,9 @@ def talkToServer(typeOfRequest, user, server, portToOpen, otp, clientPteKeyPath)
     d = s.recvfrom(1024)
     data = d[0]
     addr = d[1]
+
+    if not data:
+        return False
 
     reply_data = pickle.loads(data)
     reply_data_enc = reply_data[0]
