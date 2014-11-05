@@ -13,6 +13,8 @@ from libs.crypto import encrypt_RSA, decrypt_RSA, sign_data, verify_sign
 
 
 SERVER = 'localhost'
+#SERVER = '192.168.2.144'
+
 KNOCK_PORT = 8888
 
 typeOfRequest = ''
@@ -48,7 +50,6 @@ def checkAuthencityOfMsg(data_signed, data_enc):
         print "User is not authentic"
         return False
 
-
 def checkIPMatches(addr, data):
     if (addr[0] == data[2]):
         print "IP matches"
@@ -57,7 +58,6 @@ def checkIPMatches(addr, data):
         print "IP do not match: " + addr[0] + " " + data[2]
         return False
 
-
 def checkNonceFreshness(nonceA):
     if ( int(time.time()) - nonceA <= 30 ):
         print 'nonce is still fresh'
@@ -65,7 +65,6 @@ def checkNonceFreshness(nonceA):
     else:
         print 'stale nonce'
         return False
-
 
 def checkServerNonce(nonceServer, rec_nonceServer):
     if (rec_nonceServer == nonceServer):
@@ -107,39 +106,46 @@ while(1) :
         nonceClient = data_plain[5]
         isNonceFresh = checkNonceFreshness(nonceClient)
         #check otp
-        #if else to ensure all true. then continue
 
+        if (isUserAuthentic and isIPReal and isNonceFresh):
+            #second comms
+            nonceServer = random.randint(100000000, 999999999)
+            reply = [nonceClient, nonceServer]
+            reply = pickle.dumps(reply)
+            reply_enc = encrypt_RSA(client_public_key, reply)
+            reply_signed = sign_data(server_private_key, reply_enc)
+            reply_payload = [reply_enc, reply_signed]
+            reply_payload = pickle.dumps(reply_payload)
+            s.sendto(reply_payload , addr)
 
-        #second comms
-        nonceServer = random.randint(100000000, 999999999)
-        reply = [nonceClient, nonceServer]
-        reply = pickle.dumps(reply)
-        reply_enc = encrypt_RSA(client_public_key, reply)
-        reply_signed = sign_data(server_private_key, reply_enc)
-        reply_payload = [reply_enc, reply_signed]
-        reply_payload = pickle.dumps(reply_payload)
-        s.sendto(reply_payload , addr)
+            #third comms
+            d = s.recvfrom(1024)
+            data = d[0]
+            addr = d[1]
 
-        #third comms
-        d = s.recvfrom(1024)
-        data = d[0]
-        addr = d[1]
+            if not data:
+                break
 
-        rec_data = pickle.loads(data)
-        rec_data_enc = rec_data[0]
-        rec_data_signed = rec_data[1]
-        rec_data_plain = decrypt_RSA(server_private_key, rec_data_enc)
-        rec_data_plain = pickle.loads(rec_data_plain)
-        rec_nonceServer = rec_data_plain
-        isUserAuthentic = checkAuthencityOfMsg(rec_data_signed, rec_data_enc)
-        isServerNonceFresh = checkServerNonce(nonceServer, rec_nonceServer)
+            rec_data = pickle.loads(data)
+            rec_data_enc = rec_data[0]
+            rec_data_signed = rec_data[1]
+            rec_data_plain = decrypt_RSA(server_private_key, rec_data_enc)
+            rec_data_plain = pickle.loads(rec_data_plain)
+            rec_nonceServer = rec_data_plain
+            isUserAuthentic = checkAuthencityOfMsg(rec_data_signed, rec_data_enc)
+            isServerNonceFresh = checkServerNonce(nonceServer, rec_nonceServer)
 
-        print "Operation: " + data_plain[1]
-        #Call teye script to open or close port.
-        #data_plain[0] is the type of operation, open or close
-        #data_plain[2] is the ip address, obtained from clientComms scriptr, verified with header
-        #data_plain[3] is the port, to open or closed
+            if (isUserAuthentic and isServerNonceFresh):
+                print "Operation: " + data_plain[1]
+                #Call teye script to open or close port.
+                #data_plain[0] is the type of operation, open or close
+                #data_plain[2] is the ip address, obtained from clientComms scriptr, verified with header
+                #data_plain[3] is the port, to open or closed
+            else:
+                print "port not opened" #do nth. silent
 
     except socket.error, msg:
         print 'Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
-        sys.exit()
+        #sys.exit()
+    except:
+        #do nth. loop again
