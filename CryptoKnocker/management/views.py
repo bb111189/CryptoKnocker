@@ -8,14 +8,10 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from models import portProfileList, portProfile
-<<<<<<< HEAD
 from django.conf import settings
 from os.path import join
 from libs.crypto import generate_RSA
-=======
 from libs.pyg2fa import qrCodeURL, validate
-
->>>>>>> a88baecc939bfa8560ce7ce2c0b18a6663a5fe1f
 
 # Create your views here.
 
