@@ -13,6 +13,13 @@ def add_input_rule_to_filter(rule):
     return
 
 
+# Add rule to choice of filter
+def add_rule_to_filter(rule, filter_choice):
+    chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), filter_choice)
+    chain.insert_rule(rule)
+    return
+
+
 # Block all incoming from external
 def block_ext_in_traffic():
     rule = iptc.Rule()
@@ -20,6 +27,16 @@ def block_ext_in_traffic():
     rule.out_interface = "eth0"
     rule.target = iptc.Target(rule, "DROP")
     add_input_rule_to_filter(rule)
+    return
+
+
+# Forward traffic from wlan0 to eth0
+def forward_wlan_traffic():
+    rule = iptc.Rule()
+    rule.in_interface = "wlan0"
+    rule.out_interface = "eth0"
+    rule.target = iptc.Target(rule, "ACCEPT")
+    add_rule_to_filter(rule, "FORWARD")
     return
 
 
@@ -60,6 +77,7 @@ def allow_server_traffic():
 
 
 block_ext_in_traffic()
+forward_wlan_traffic()
 allow_loopback()
 allow_ext_single_port()
 allow_server_traffic()
