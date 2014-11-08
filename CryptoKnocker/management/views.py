@@ -13,6 +13,7 @@ from os.path import join
 from libs.crypto import generate_RSA
 from libs.pyg2fa import qrCodeURL, validate
 
+
 # Create your views here.
 
 

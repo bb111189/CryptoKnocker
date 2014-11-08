@@ -18,7 +18,7 @@ import netifaces as ni
 
 #SERVER = 'localhost'
 SERVER = ni.ifaddresses('wlan0')[2][0]['addr']
-
+print SERVER
 KNOCK_PORT = 8888
 
 typeOfRequest = ''
@@ -78,8 +78,13 @@ def checkServerNonce(nonceServer, rec_nonceServer):
         print 'Server nonce is stale'
         return False
 
-#server_private_key = ''
-#get private key from pi db
+private_key_file = open("../CryptoKnocker/server_keys/server_private.key", "r")
+lines = private_key_file.readlines()
+#server_private_key = ""
+for line in lines:
+	#server_private_key +=line
+	pass
+#print "\n %s"%(server_private_key)
 
 portlog = PortLog()
 
@@ -93,7 +98,8 @@ while(1) :
 
     try :
         #first comms
-        d = s.recvfrom(1024)
+        print "listening for new connections..."
+	d = s.recvfrom(1024)
         data = d[0]
         addr = d[1]
 
@@ -111,8 +117,8 @@ while(1) :
         client_public_key_path = client_public_key_path.encode('utf-8')
         client_public_key_path = '../CryptoKnocker/' + client_public_key_path
         client_public_key_path = os.path.abspath(client_public_key_path)
-        client_private_key = open(client_public_key_path, "r").read()
-
+        client_public_key = open(client_public_key_path, "r").readlines()
+	print client_public_key
         isUserAuthentic = checkAuthencityOfMsg(data_signed, data_enc)
         isIPReal = checkIPMatches(addr, data_plain)
         nonceClient = data_plain[5]
@@ -121,7 +127,8 @@ while(1) :
         #check otp
         if (isUserAuthentic and isIPReal and isNonceFresh):
             #second comms
-            nonceServer = random.randint(100000000, 999999999)
+            #print "second comms"
+	    nonceServer = random.randint(100000000, 999999999)
             reply = [nonceClient, nonceServer]
             reply = pickle.dumps(reply)
             reply_enc = encrypt_RSA(client_public_key, reply)
@@ -131,11 +138,11 @@ while(1) :
             s.sendto(reply_payload , addr)
 
             #third comms
+	    #print "third comms"
             s.settimeout(5.0)
             d = s.recvfrom(1024)
             data = d[0]
             addr = d[1]
-
             if not data:
                 break
 
@@ -151,16 +158,19 @@ while(1) :
             port_operation = data_plain[1]
             client_ip = data_plain[2]
             service_port = data_plain[3]
-
+	    print "client wishes to %s port" %(port_operation)
             if (isUserAuthentic and isServerNonceFresh):
+		print "authenticated and fresh nonce"
                 if port_operation == "OPEN":
-                    open_service_port(client_ip,service_port)
-                    set_port_status(int(service_port),"open")
+		    print "opening port %s by %s at %s" %(service_port, username, client_ip)
+                    open_service_port(client_ip,int(service_port))
+                    set_port_status(service_port,"open", username)
                     portlog.log_port_status(service_port, port_operation, username, client_ip)
 
                 elif port_operation == "CLOSE":
-                    close_service_port(client_ip, service_port)
-                    set_port_status(int(service_port),"close")
+		    print "closing port %s by %s at %s" %(service_port, username, client_ip)
+                    close_service_port(client_ip, int(service_port))
+                    set_port_status(int(service_port),"close", username)
                     portlog.log_port_status(service_port, port_operation, username, client_ip)
 
                 else:
@@ -172,9 +182,9 @@ while(1) :
 
 
     except socket.error, e:
-        print 'Error Code : ' + str(e[0]) + ' Message ' + e[1]
         #sys.exit()
-    except TypeError, e:
+	pass
+    '''except TypeError, e:
         #e = sys.exc_info()[0]
         print e
         #print 'Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
@@ -182,3 +192,4 @@ while(1) :
         e = sys.exc_info()[0]
         print e
         #print 'Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
+'''
