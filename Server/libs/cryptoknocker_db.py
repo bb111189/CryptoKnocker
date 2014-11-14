@@ -38,9 +38,9 @@ def get_user_allowed_ports(username):
 
 def get_user_seed(username):
     '''
-    Get ports assigned to username
+    Get seed of user name
     :param username: client username
-    :return: list of ports
+    :return: seed
     '''
     QUERY = "SELECT seed FROM management_portprofile WHERE userID=?"
     PARAMETERS = (username,)
