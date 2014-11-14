@@ -12,7 +12,7 @@ from django.conf import settings
 from os.path import join
 from libs.crypto import generate_RSA
 from libs.pyg2fa import qrCodeURL, validate
-
+from libs.seedGenerator import generateSeed
 
 # Create your views here.
 
@@ -75,7 +75,8 @@ def registration(request):
             #portSet = __list_ports(True)
 
             #generate QR CODE here
-            randomSeed = "KKK67SDNLXIOG65U" #random 16 digit base 32 no # store this inside DB hardcode first
+            #randomSeed = "KKK67SDNLXIOG65U" #random 16 digit base 32 no # store this inside DB hardcode first
+            randomSeed = generateSeed()
             QRCodeURL = qrCodeURL("CryptoKnocker", randomSeed) ## url for qr code. Basically user need to key in this rando
 
             return render_to_response("management/index.html",{"pageType":"qrcode", 'QRCodeURL': QRCodeURL},context_instance=RequestContext(request))
