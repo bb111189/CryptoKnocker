@@ -79,7 +79,7 @@ def registration(request):
             randomSeed = generateSeed()
             QRCodeURL = qrCodeURL("CryptoKnocker", randomSeed) ## url for qr code. Basically user need to key in this rando
 
-            return render_to_response("management/index.html",{"pageType":"qrcode", 'QRCodeURL': QRCodeURL},context_instance=RequestContext(request))
+            return render_to_response("management/index.html",{"pageType":"qrcode", 'QRCodeURL': QRCodeURL, 'seed' : randomSeed},context_instance=RequestContext(request))
         else:
             return render_to_response("management/index.html",{"pageType":"registration", "user_form":user_form},context_instance=RequestContext(request))
     user_form = portProfileList()

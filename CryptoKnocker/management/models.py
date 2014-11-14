@@ -33,6 +33,7 @@ class portProfileList(ModelForm):
             'port' : 'Port',
             'serviceName' : 'Service Name',
             'publicKey' : 'Public Key',
+            'seed' : 'seed',
             }
 
         def custom_field_attr(classname="", placeholder="none"):
