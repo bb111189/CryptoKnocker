@@ -12,6 +12,7 @@ class portProfile(models.Model):
     serviceName = models.CharField(max_length="20", blank=False)
     publicKey = models.FileField(blank=False, upload_to="./client_public_key/")
     status = models.CharField(max_length=5, blank=False, default="close")
+    seed = models.CharField(max_length=10, blank=True)
 
     class Meta:
         unique_together = ("userID", "port")
@@ -33,7 +34,7 @@ class portProfileList(ModelForm):
             'port' : 'Port',
             'serviceName' : 'Service Name',
             'publicKey' : 'Public Key',
-            'seed' : 'seed',
+            'seed' : 'seed'
             }
 
         def custom_field_attr(classname="", placeholder="none"):
