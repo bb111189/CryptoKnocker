@@ -36,6 +36,22 @@ def get_user_allowed_ports(username):
 
     return results
 
+def get_user_seed(username):
+    '''
+    Get ports assigned to username
+    :param username: client username
+    :return: list of ports
+    '''
+    QUERY = "SELECT seed FROM management_portprofile WHERE userID=?"
+    PARAMETERS = (username,)
+
+    conn = sqlite3.connect(SQLITE_DB_PATH)
+    result = conn.execute(QUERY, PARAMETERS)
+    results = result.fetchall()
+    conn.close()
+
+    return results
+
 def doesUsernameExist(username):
     '''
     Check if username exist in database

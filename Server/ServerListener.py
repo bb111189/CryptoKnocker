@@ -10,11 +10,12 @@ import random
 import os
 
 from libs.crypto import encrypt_RSA, decrypt_RSA, sign_data, verify_sign
-from libs.cryptoknocker_db import get_public_key_path, set_port_status
+from libs.cryptoknocker_db import get_public_key_path, set_port_status, get_user_seed
 from libs.port_operations.openServicePort import open_service_port
 from libs.port_operations.closeIndividualPort import close_service_port
 from libs.logger import PortLog
 import netifaces as ni
+from libs.pyg2fa import validate
 
 #SERVER = 'localhost'
 SERVER = ni.ifaddresses('wlan0')[2][0]['addr']
@@ -60,6 +61,13 @@ def checkIPMatches(addr, data):
         return True
     else:
         print "IP do not match: " + addr[0] + " " + data[2]
+        return False
+
+def checkOTP(user, otp):
+    seed = get_user_seed(user)
+    if (validate(seed, int(otp), 4)):
+        return True
+    else:
         return False
 
 def checkNonceFreshness(nonceA):
@@ -121,6 +129,8 @@ while(1) :
 	print client_public_key
         isUserAuthentic = checkAuthencityOfMsg(data_signed, data_enc)
         isIPReal = checkIPMatches(addr, data_plain)
+        otpclient = data_plain[4]
+        isValidOTP = checkOTP(username,otpclient)
         nonceClient = data_plain[5]
         isNonceFresh = checkNonceFreshness(nonceClient)
 
