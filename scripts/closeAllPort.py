@@ -3,7 +3,9 @@
 import iptc
 
 EXTERNAL_IN_PORT = 8888
-INTERNAL_IN_PORT = 8000
+INTERNAL_IN_PORT1 = 8000
+INTERNAL_IN_PORT2 = 22
+INTERNAL_IN_PORT3 = 8080
 
 
 # Add rule to INPUT Filter
@@ -66,12 +68,12 @@ def allow_loopback():
 
 
 # Allow internal server web UI
-def allow_server_traffic():
+def allow_server_traffic(internal_port):
     rule = iptc.Rule()
     rule.in_interface = "eth0"
     rule.protocol = "tcp"
     match = iptc.Match(rule, "tcp")
-    match.dport = "%d" % INTERNAL_IN_PORT
+    match.dport = "%d" % internal_port
     rule.add_match(match)
     rule.target = iptc.Target(rule, "ACCEPT")
     add_input_rule_to_filter(rule)
@@ -83,4 +85,6 @@ block_ext_in_traffic()
 #forward_wlan_traffic()
 #allow_loopback()
 allow_ext_single_port()
-allow_server_traffic()
+allow_server_traffic(INTERNAL_IN_PORT1)
+allow_server_traffic(INTERNAL_IN_PORT2)
+allow_server_traffic(INTERNAL_IN_PORT3)
