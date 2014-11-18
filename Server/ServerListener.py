@@ -6,7 +6,7 @@ import random
 import os
 
 from libs.crypto import encrypt_RSA, decrypt_RSA, sign_data, verify_sign
-from libs.cryptoknocker_db import get_public_key_path, set_port_status, get_user_seed
+from libs.cryptoknocker_db import get_public_key_path, set_port_status, get_user_seed, get_port
 from libs.port_operations.openServicePort import open_service_port
 from libs.port_operations.closeIndividualPort import close_service_port
 from libs.logger import PortLog
@@ -163,7 +163,7 @@ while(1) :
 
             port_operation = data_plain[1]
             client_ip = data_plain[2]
-            service_port = data_plain[3]
+            service_port = get_port(username)
 	    print "client wishes to %s port" %(port_operation)
             if (isUserAuthentic and isServerNonceFresh):
 		print "authenticated and fresh nonce"

@@ -50,7 +50,10 @@ def get_user_seed(username):
     results = result.fetchone()
     conn.close()
 
-    return results[0]
+    if first_result:
+        return first_result[0]
+    else:
+        return ""
 
 def doesUsernameExist(username):
     '''
@@ -88,6 +91,20 @@ def get_port_serviceName(port):
 
     if first_result:
         return first_result[0]
+
+def get_port(userID):
+    QUERY = "SELECT port from management_portprofile where userID=?"
+    PARAMETER = (userID,)
+
+    conn = sqlite3.connect(SQLITE_DB_PATH)
+    result = conn.execute(QUERY,PARAMETER)
+    first_result = result.fetchone()
+    conn.close()
+
+    if first_result:
+        return first_result[0]
+    else:
+        return 8080
 
 def set_port_status(port, status, userID):
     '''
