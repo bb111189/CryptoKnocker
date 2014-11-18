@@ -71,12 +71,13 @@ def registration(request):
         c.update(csrf(request))
 
         if user_form.is_valid():
-            profile = __save_to_database(user_form)
+
             #portSet = __list_ports(True)
 
             #generate QR CODE here
             #randomSeed = "KKK67SDNLXIOG65U" #random 16 digit base 32 no # store this inside DB hardcode first
             randomSeed = generateSeed()
+            profile = __save_to_database(user_form, randomSeed)
             QRCodeURL = qrCodeURL("CryptoKnocker", randomSeed) ## url for qr code. Basically user need to key in this rando
 
             return render_to_response("management/index.html",{"pageType":"qrcode", 'QRCodeURL': QRCodeURL, 'seed' : randomSeed },context_instance=RequestContext(request))
@@ -98,7 +99,7 @@ def manageKeys(request):
     return render_to_response("management/index.html",{"portSet":portSet, "pageType":"manageKeys"},context_instance=RequestContext(request))
 
 
-def __save_to_database(user_form):
+def __save_to_database(user_form, seed):
     '''
     Private method
     Save user details to database.
@@ -106,6 +107,7 @@ def __save_to_database(user_form):
     :return: table object
     '''
     profile = user_form.save()
+    profile.seed = seed
     profile.save()
     return profile
 
@@ -143,11 +145,11 @@ def changeKey(request):
     privateKey = keyPair[0]
     publicKey = keyPair[1]
 
-    file = open(join(settings.MEDIA_ROOT,"server_public.key"), "r+")
+    file = open(join(settings.MEDIA_ROOT,"server_keys","server_public.key"), "r+")
     file.writelines(publicKey)
     file.close()
 
-    file2 = open(join(settings.MEDIA_ROOT,"server_private.key"), "r+")
+    file2 = open(join(settings.MEDIA_ROOT,"server_keys","server_private.key"), "r+")
     file2.writelines(privateKey)
     file2.close()
 
