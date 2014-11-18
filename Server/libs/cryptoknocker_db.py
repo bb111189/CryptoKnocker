@@ -50,8 +50,8 @@ def get_user_seed(username):
     results = result.fetchone()
     conn.close()
 
-    if first_result:
-        return first_result[0]
+    if results:
+        return results[0]
     else:
         return ""
 
