@@ -50,7 +50,7 @@ def get_user_seed(username):
     results = result.fetchone()
     conn.close()
 
-    return results
+    return results[0]
 
 def doesUsernameExist(username):
     '''
