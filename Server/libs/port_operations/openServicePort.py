@@ -87,5 +87,6 @@ def open_service_port(client_ip, service_port):
         chain = iptc.Chain(iptc.Table(iptc.Table.FILTER), "INPUT")
         chain.insert_rule(rule)
         '''
+        delete_drop_rule(client_ip, service_port)
         allow_server_traffic(8080)
     return

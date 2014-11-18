@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8eeb6d60-a1a1-49c1-bdb5-938cf81821e9" name="Default" comment="Added checks for OTP on serverListerner">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Server/libs/port_operations/closeAllPort.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/ServerListener.py" afterPath="$PROJECT_DIR$/Server/ServerListener.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py" afterPath="$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py" afterPath="$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CS3235_project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,8 +42,8 @@
       <file leaf-file-name="openServicePort.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="18.16" vertical-offset="879" max-vertical-offset="1632">
-              <caret line="25" column="92" selection-start-line="25" selection-start-column="92" selection-end-line="25" selection-end-column="92" />
+            <state vertical-scroll-proportion="-24.0" vertical-offset="913" max-vertical-offset="1649">
+              <caret line="89" column="24" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -114,9 +110,9 @@
         <option value="$PROJECT_DIR$/CryptoKnocker/management/views.py" />
         <option value="$PROJECT_DIR$/scripts/closeAllPort.py" />
         <option value="$PROJECT_DIR$/Server/libs/cryptoknocker_db.py" />
-        <option value="$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py" />
         <option value="$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py" />
         <option value="$PROJECT_DIR$/Server/ServerListener.py" />
+        <option value="$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py" />
       </list>
     </option>
   </component>
@@ -932,6 +928,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/closeAllPort.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3852573" vertical-offset="1134" max-vertical-offset="1853">
+          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="93" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Server/ServerListener.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.68" vertical-offset="2482" max-vertical-offset="3553">
@@ -942,18 +946,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/closeAllPort.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3852573" vertical-offset="1134" max-vertical-offset="1853">
-          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="93" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="18.16" vertical-offset="879" max-vertical-offset="1632">
-          <caret line="25" column="92" selection-start-line="25" selection-start-column="92" selection-end-line="25" selection-end-column="92" />
+        <state vertical-scroll-proportion="-24.0" vertical-offset="913" max-vertical-offset="1649">
+          <caret line="89" column="24" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="24" />
           <folding />
         </state>
       </provider>
