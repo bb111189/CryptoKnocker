@@ -47,7 +47,7 @@ def get_user_seed(username):
 
     conn = sqlite3.connect(SQLITE_DB_PATH)
     result = conn.execute(QUERY, PARAMETERS)
-    results = result.fetchall()
+    results = result.fetchone()
     conn.close()
 
     return results
