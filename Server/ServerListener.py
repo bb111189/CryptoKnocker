@@ -8,6 +8,7 @@ import os
 from libs.crypto import encrypt_RSA, decrypt_RSA, sign_data, verify_sign
 from libs.cryptoknocker_db import get_public_key_path, set_port_status, get_user_seed, get_port
 from libs.port_operations.openServicePort import open_service_port
+from libs.port_operations.closeAllPort import block_server_traffic
 from libs.port_operations.closeIndividualPort import close_service_port
 from libs.logger import PortLog
 import netifaces as ni
@@ -170,6 +171,7 @@ while(1) :
                 if port_operation == "OPEN":
 		    print "opening port %s by %s at %s" %(service_port, username, client_ip)
                     open_service_port(client_ip,int(service_port))
+
                     set_port_status(service_port,"open", username)
                     portlog.log_port_status(service_port, port_operation, username, client_ip)
 
