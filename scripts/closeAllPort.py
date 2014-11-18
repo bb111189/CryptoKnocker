@@ -26,7 +26,7 @@ def add_rule_to_filter(rule, filter_choice):
 def block_ext_in_traffic():
     rule = iptc.Rule()
     rule.in_interface = "wlan0"
-    rule.out_interface = "eth0"
+    rule.out_interface = "any"
     rule.target = iptc.Target(rule, "DROP")
     add_input_rule_to_filter(rule)
     add_rule_to_filter(rule, "OUTPUT")
@@ -47,7 +47,7 @@ def forward_wlan_traffic():
 def allow_ext_single_port():
     rule = iptc.Rule()
     rule.in_interface = "wlan0"
-    rule.out_interface = "eth0"
+    rule.out_interface = "any"
     rule.protocol = "udp"
     match = iptc.Match(rule, "udp")
     match.dport = "%d" % EXTERNAL_IN_PORT
