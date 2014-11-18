@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8eeb6d60-a1a1-49c1-bdb5-938cf81821e9" name="Default" comment="Added checks for OTP on serverListerner">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/closeAllPort.py" afterPath="$PROJECT_DIR$/scripts/closeAllPort.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CS3235_project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,8 +32,8 @@
       <file leaf-file-name="closeAllPort.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/closeAllPort.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5910987" vertical-offset="51" max-vertical-offset="1632">
-              <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.5674548" vertical-offset="51" max-vertical-offset="1632">
+              <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -868,8 +867,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/closeAllPort.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5910987" vertical-offset="51" max-vertical-offset="1632">
-          <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.5674548" vertical-offset="51" max-vertical-offset="1632">
+          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
           <folding />
         </state>
       </provider>

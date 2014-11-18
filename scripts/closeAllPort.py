@@ -25,7 +25,7 @@ def add_rule_to_filter(rule, filter_choice):
 # Block all incoming from external
 def block_ext_in_traffic():
     rule = iptc.Rule()
-    rule.in_interface = "wlan0"
+    rule.in_interface = "any"
     rule.out_interface = "any"
     rule.target = iptc.Target(rule, "DROP")
     add_input_rule_to_filter(rule)
