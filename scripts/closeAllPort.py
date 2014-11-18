@@ -80,11 +80,24 @@ def allow_server_traffic(internal_port):
     add_rule_to_filter(rule, "OUTPUT")
     return
 
+# Block services
+def block_server_traffic(internal_port):
+    rule = iptc.Rule()
+    rule.in_interface = "wlan0"
+    rule.protocol = "tcp"
+    match = iptc.Match(rule, "tcp")
+    match.dport = "%d" % internal_port
+    rule.add_match(match)
+    rule.target = iptc.Target(rule, "DROP")
+    add_input_rule_to_filter(rule)
+    add_rule_to_filter(rule, "OUTPUT")
+    return
+
 
 block_ext_in_traffic()
 #forward_wlan_traffic()
 #allow_loopback()
+block_server_traffic(INTERNAL_IN_PORT3)
 allow_ext_single_port()
 allow_server_traffic(INTERNAL_IN_PORT1)
 allow_server_traffic(INTERNAL_IN_PORT2)
-allow_server_traffic(INTERNAL_IN_PORT3)

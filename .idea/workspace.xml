@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8eeb6d60-a1a1-49c1-bdb5-938cf81821e9" name="Default" comment="Added checks for OTP on serverListerner">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/ServerListener.py" afterPath="$PROJECT_DIR$/Server/ServerListener.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/closeAllPort.py" afterPath="$PROJECT_DIR$/scripts/closeAllPort.py" />
     </list>
     <ignored path="CS3235_project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,21 +29,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="closeAllPort.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="closeAllPort.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/closeAllPort.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.24" vertical-offset="510" max-vertical-offset="1632">
-              <caret line="48" column="28" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.7635605" vertical-offset="1134" max-vertical-offset="1853">
+              <caret line="99" column="39" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerListener.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="openServicePort.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.32" vertical-offset="565" max-vertical-offset="1309">
+              <caret line="44" column="68" selection-start-line="44" selection-start-column="68" selection-end-line="44" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="closeIndividualPort.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-21.96" vertical-offset="505" max-vertical-offset="1224">
+              <caret line="62" column="17" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerListener.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/ServerListener.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.024079321" vertical-offset="0" max-vertical-offset="3298">
-              <caret line="14" column="18" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="18" />
+            <state vertical-scroll-proportion="-61.2" vertical-offset="0" max-vertical-offset="3298">
+              <caret line="103" column="20" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -70,8 +90,8 @@
         <option value="$PROJECT_DIR$/CryptoKnocker/management/views.py" />
         <option value="$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py" />
         <option value="$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py" />
-        <option value="$PROJECT_DIR$/scripts/closeAllPort.py" />
         <option value="$PROJECT_DIR$/Server/ServerListener.py" />
+        <option value="$PROJECT_DIR$/scripts/closeAllPort.py" />
       </list>
     </option>
   </component>
@@ -379,9 +399,6 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -403,6 +420,9 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -861,32 +881,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py">
+    <entry file="file://$PROJECT_DIR$/Server/ServerListener.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="748" max-vertical-offset="1309">
-          <caret line="44" column="68" selection-start-line="44" selection-start-column="68" selection-end-line="44" selection-end-column="68" />
+        <state vertical-scroll-proportion="-61.2" vertical-offset="0" max-vertical-offset="3298">
+          <caret line="103" column="20" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1003" max-vertical-offset="1224">
-          <caret line="59" column="25" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+        <state vertical-scroll-proportion="-21.96" vertical-offset="505" max-vertical-offset="1224">
+          <caret line="62" column="17" selection-start-line="62" selection-start-column="4" selection-end-line="62" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.32" vertical-offset="565" max-vertical-offset="1309">
+          <caret line="44" column="68" selection-start-line="44" selection-start-column="68" selection-end-line="44" selection-end-column="68" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/closeAllPort.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.24" vertical-offset="510" max-vertical-offset="1632">
-          <caret line="48" column="28" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/ServerListener.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.024079321" vertical-offset="0" max-vertical-offset="3298">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.7635605" vertical-offset="1134" max-vertical-offset="1853">
+          <caret line="99" column="39" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
           <folding />
         </state>
       </provider>
