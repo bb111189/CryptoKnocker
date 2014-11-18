@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8eeb6d60-a1a1-49c1-bdb5-938cf81821e9" name="Default" comment="Added checks for OTP on serverListerner">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/libs/cryptoknocker_db.py" afterPath="$PROJECT_DIR$/Server/libs/cryptoknocker_db.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py" afterPath="$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py" afterPath="$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py" />
     </list>
     <ignored path="CS3235_project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +33,7 @@
       <file leaf-file-name="closeAllPort.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/closeAllPort.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.96" vertical-offset="1134" max-vertical-offset="1853">
+            <state vertical-scroll-proportion="-64.8" vertical-offset="63" max-vertical-offset="1853">
               <caret line="99" column="39" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
               <folding />
             </state>
@@ -42,18 +43,18 @@
       <file leaf-file-name="openServicePort.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.52" vertical-offset="437" max-vertical-offset="1156">
-              <caret line="50" column="49" selection-start-line="50" selection-start-column="49" selection-end-line="50" selection-end-column="49" />
+            <state vertical-scroll-proportion="-19.24" vertical-offset="437" max-vertical-offset="1156">
+              <caret line="54" column="9" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="closeIndividualPort.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="closeIndividualPort.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.12" vertical-offset="335" max-vertical-offset="1105">
-              <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.550765" vertical-offset="284" max-vertical-offset="1105">
+              <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -71,10 +72,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cryptoknocker_db.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="cryptoknocker_db.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/libs/cryptoknocker_db.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6620306" vertical-offset="1275" max-vertical-offset="2278">
+            <state vertical-scroll-proportion="-19.04" vertical-offset="1275" max-vertical-offset="2278">
               <caret line="103" column="20" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
               <folding>
                 <marker date="1416333545215" expanded="true" signature="250:309" placeholder="SELECT publi..management_portprofile..." />
@@ -109,10 +110,10 @@
         <option value="$PROJECT_DIR$/Client/clientComms.py" />
         <option value="$PROJECT_DIR$/CryptoKnocker/management/views.py" />
         <option value="$PROJECT_DIR$/scripts/closeAllPort.py" />
-        <option value="$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py" />
-        <option value="$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py" />
         <option value="$PROJECT_DIR$/Server/ServerListener.py" />
         <option value="$PROJECT_DIR$/Server/libs/cryptoknocker_db.py" />
+        <option value="$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py" />
+        <option value="$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py" />
       </list>
     </option>
   </component>
@@ -909,11 +910,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/closeAllPort.py">
+    <entry file="file://$PROJECT_DIR$/Server/libs/cryptoknocker_db.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.96" vertical-offset="1134" max-vertical-offset="1853">
-          <caret line="99" column="39" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
-          <folding />
+        <state vertical-scroll-proportion="-19.04" vertical-offset="1275" max-vertical-offset="2278">
+          <caret line="103" column="20" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
+          <folding>
+            <marker date="1416333545215" expanded="true" signature="250:309" placeholder="SELECT publi..management_portprofile..." />
+            <marker date="1416333545215" expanded="true" signature="675:729" placeholder="SELECT port ..management_portprofile..." />
+            <marker date="1416333545215" expanded="true" signature="1058:1112" placeholder="SELECT seed ..management_portprofile..." />
+            <marker date="1416333545215" expanded="true" signature="1529:1603" placeholder="SELECT EXIST..." />
+            <marker date="1416333545215" expanded="true" signature="1543:1594" placeholder="select 1 fro..management_portprofile..." />
+            <marker date="1416333545215" expanded="true" signature="2026:2085" placeholder="SELECT servi..management_portprofile..." />
+            <marker date="1416333545215" expanded="true" signature="2341:2395" placeholder="SELECT port ..management_portprofile..." />
+            <marker date="1416333545215" expanded="true" signature="2865:2933" placeholder="UPDATE manag..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -927,36 +937,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py">
+    <entry file="file://$PROJECT_DIR$/scripts/closeAllPort.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.12" vertical-offset="335" max-vertical-offset="1105">
-          <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+        <state vertical-scroll-proportion="-64.8" vertical-offset="63" max-vertical-offset="1853">
+          <caret line="99" column="39" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/openServicePort.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.52" vertical-offset="437" max-vertical-offset="1156">
-          <caret line="50" column="49" selection-start-line="50" selection-start-column="49" selection-end-line="50" selection-end-column="49" />
+        <state vertical-scroll-proportion="-19.24" vertical-offset="437" max-vertical-offset="1156">
+          <caret line="54" column="9" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/libs/cryptoknocker_db.py">
+    <entry file="file://$PROJECT_DIR$/Server/libs/port_operations/closeIndividualPort.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6620306" vertical-offset="1275" max-vertical-offset="2278">
-          <caret line="103" column="20" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
-          <folding>
-            <marker date="1416333545215" expanded="true" signature="250:309" placeholder="SELECT publi..management_portprofile..." />
-            <marker date="1416333545215" expanded="true" signature="675:729" placeholder="SELECT port ..management_portprofile..." />
-            <marker date="1416333545215" expanded="true" signature="1058:1112" placeholder="SELECT seed ..management_portprofile..." />
-            <marker date="1416333545215" expanded="true" signature="1529:1603" placeholder="SELECT EXIST..." />
-            <marker date="1416333545215" expanded="true" signature="1543:1594" placeholder="select 1 fro..management_portprofile..." />
-            <marker date="1416333545215" expanded="true" signature="2026:2085" placeholder="SELECT servi..management_portprofile..." />
-            <marker date="1416333545215" expanded="true" signature="2341:2395" placeholder="SELECT port ..management_portprofile..." />
-            <marker date="1416333545215" expanded="true" signature="2865:2933" placeholder="UPDATE manag..." />
-          </folding>
+        <state vertical-scroll-proportion="0.550765" vertical-offset="284" max-vertical-offset="1105">
+          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

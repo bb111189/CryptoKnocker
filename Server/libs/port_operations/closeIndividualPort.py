@@ -38,7 +38,7 @@ def add_deny_rule(client_ip, service_port):
     rule = iptc.Rule()
     rule.in_interface = "wlan0"
     rule.out_interface = "any"
-    rule.src = client_ip
+    #rule.src = client_ip
     rule.protocol = "tcp"
     match = iptc.Match(rule, "tcp")
     match.dport = "%d" % service_port
