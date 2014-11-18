@@ -27,6 +27,7 @@ def block_ext_in_traffic():
     rule.out_interface = "eth0"
     rule.target = iptc.Target(rule, "DROP")
     add_input_rule_to_filter(rule)
+    add_rule_to_filter(rule, "OUTPUT")
     return
 
 
@@ -51,6 +52,7 @@ def allow_ext_single_port():
     rule.add_match(match)
     rule.target = iptc.Target(rule, "ACCEPT")
     add_input_rule_to_filter(rule)
+    add_rule_to_filter(rule, "OUTPUT")
     return
 
 
@@ -73,11 +75,12 @@ def allow_server_traffic():
     rule.add_match(match)
     rule.target = iptc.Target(rule, "ACCEPT")
     add_input_rule_to_filter(rule)
+    add_rule_to_filter(rule, "OUTPUT")
     return
 
 
 block_ext_in_traffic()
-forward_wlan_traffic()
-allow_loopback()
+#forward_wlan_traffic()
+#allow_loopback()
 allow_ext_single_port()
 allow_server_traffic()
