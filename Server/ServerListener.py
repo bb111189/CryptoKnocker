@@ -132,7 +132,7 @@ while(1) :
         isNonceFresh = checkNonceFreshness(nonceClient)
 
         #check otp
-        if (isUserAuthentic and isIPReal and isNonceFresh):
+        if (isUserAuthentic and isIPReal and isNonceFresh and isValidOTP):
             #second comms
             #print "second comms"
 	    nonceServer = random.randint(100000000, 999999999)
